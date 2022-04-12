@@ -1,4 +1,4 @@
-# Category 3: NATIVITY AND CITIZENSHIP STATUS
+# Category 3: Nativity AND Citizenship Status
 
 This category shows the population of the country by nativity and citizenship status. The first variable `pct_us_born` is the percentage of the population that is a U.S citizen born in the United States. The second variable `pct_us_naturalized` is the percentage of the population that is a U.S citizen by naturalization.
 

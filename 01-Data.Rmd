@@ -1,7 +1,5 @@
 # Data
 
-(You can add more ### level headers, but don't add ## level headers because they'll split into separate HTML files...and delete this comment)
-
 ## GIS data download and preparation
 ```{r, message=FALSE, warning=FALSE, include=TRUE}
 library(tidyverse)
@@ -228,7 +226,8 @@ countyGIS <- countyGIS %>%
 
 ## Election data download and preparation
 
-Now we're going to download 2020 county-level election results from a GitHub repo. You can read more about the data [in the repo](https://github.com/tonmcg/US_County_Level_Election_Results_08-20. 
+Now we're going to download 2020 county-level election results from a GitHub repo. You can read more about the data [in the repo](https://github.com/tonmcg/US_County_Level_Election_Results_08-20). 
+
 ```{r, message=FALSE, warning=FALSE, include=TRUE}
 ## 2020 Election data
 dta2020 <- read_csv("https://raw.githubusercontent.com/tonmcg/US_County_Level_Election_Results_08-20/master/2020_US_County_Level_Presidential_Results.csv")
