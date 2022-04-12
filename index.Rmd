@@ -1,0 +1,34 @@
+--- 
+title: "CP"
+author: "Alec Nguyen, Bruno Sotelo, Michael Zhang"
+date: "`r Sys.time()`"
+site: bookdown::bookdown_site
+bibliography: references.bib
+biblio-style: apalike
+link-citations: yes
+---
+
+
+# Honor Code {-}
+
+At the bottom of this page we type out the confirmation of the LU Honor Code, certifying that we understand the following: 
+
+This project represents our own work. 
+
+We can use any resources from 380 (e.g., anything in Moodle, anything in GitHub) or that we find online (e.g., DataCamp, tutorials, Stack Exchange) to help us write our code or understand the data (e.g., Census Bureau website, tidycensus website). 
+
+We can talk to Prof. Lhost, tutors, and/or other students (in or not in the class), but need to acknowledge any help we received here: 
+
+Professor Jonathan Lhost for helping us with the coding in data preparation and summary statistics sections.
+
+All work beyond the help we just acknowledged is our own. 
+
+If we have any questions about what might constitute plagiarism or other violations of the Honor Code, we will ask Prof. Lhost before submitting our project. 
+
+We understand that violation of these terms is a violation of the Honor Code and that our work will not be accepted without our reaffirmation of the LU Honor Code here: 
+
+Alec Nguyen
+
+Bruno Sotelo
+
+Michael Zhang

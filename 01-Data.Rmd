@@ -1,0 +1,313 @@
+# Data
+
+(You can add more ### level headers, but don't add ## level headers because they'll split into separate HTML files...and delete this comment)
+
+## GIS data download and preparation
+```{r, message=FALSE, warning=FALSE, include=TRUE}
+library(tidyverse)
+library(leaflet)
+library(rmapshaper)
+library(tidycensus)
+library(stargazer)
+library(scales)
+library(sf)
+library(pander)
+
+options(tigris_use_cache = TRUE)
+
+## turn off scientific notation
+options(scipen = 5)
+
+```
+
+```{r, message=FALSE, warning=FALSE, include=TRUE}
+## Download GIS data for maps
+##   geometry = TRUE --> GIS shapefile data to create maps
+##   B01001_001: total population
+##   NOTE: When you download the county data for the regressions, use options: geometry = FALSE,keep_geo_vars = FALSE
+
+# county-level data for population
+countyGIS <- get_acs(geography = "county",
+              variables = "B01001_001",
+              geometry = TRUE,
+              keep_geo_vars = TRUE)
+
+# State data (for displaying state borders on map)
+stateGIS <- get_acs(geography = "state",
+              variables = "B01001_001",
+              geometry = TRUE,
+              keep_geo_vars = FALSE)
+
+
+## Simplify GIS data to make file sizes smaller. This essentially removes some details along coastlines and very-not-straight borders. 
+stateGIS <- ms_simplify(stateGIS, keep = 0.01)
+countyGIS <- ms_simplify(countyGIS, keep = 0.01)
+
+
+countyGIS <- countyGIS %>% 
+                select(FIPS = GEOID, 
+                       stFIPS = STATEFP, 
+                       coFIPS = COUNTYFP, 
+                       coNAME = NAME.x, 
+                       pop = estimate, 
+                       geometry)
+
+
+## For maps, drop the following: 
+##   Puerto Rico (ST FIPS 72) (no election data)
+##   Alaska (ST FIPS 02) (voting data isn't reported by county...we could also map the legislative districts, but we're not going to since we'd rather have smaller maps without those extra details)
+##   Hawaii (ST FIPS 15) (so our map can zoom in on continental 48 states)
+countyGIS <- countyGIS %>% filter(stFIPS != "72" & stFIPS != "02")
+stateGIS <- stateGIS %>% filter(GEOID != "72" & GEOID != "02" & GEOID != "15")
+
+
+## join 2-character state abbreviation and create name = county, ST for labeling maps
+fipsToSTcode <- fips_codes %>% select(stFIPS = state_code, stNAME = state) %>% unique()
+
+countyGIS <- inner_join(countyGIS,fipsToSTcode,by="stFIPS")
+
+countyGIS <- countyGIS %>% mutate(name = paste0(coNAME,", ", stNAME))
+
+
+
+## NOTE: If you don't use keep_geo_vars = TRUE, you don't get separate STATEFP and COUNTYFP, but you can use mutate() and create stFIPS = substr(GEOID,1,2) and coFIPS = substr(GEOID,3,5)
+```
+
+**Category 1 variable 1**
+```{r, message=FALSE, warning=FALSE, include=TRUE}
+white <- get_acs(geography = "county",
+              variables = "B01001A_001",
+              geometry = FALSE,
+              keep_geo_vars = TRUE)
+
+white_filtered <- white %>%
+                select(FIPS = GEOID, 
+                       pop_white = estimate,
+                       moe_white = moe)
+
+
+countyGIS <- countyGIS %>%
+  inner_join(white_filtered, by = "FIPS") %>%
+  mutate(pct_white = 100 * pop_white / pop) 
+
+```
+
+**Category 1 variable 2**
+```{r, message=FALSE, warning=FALSE, include=TRUE}
+asian <- get_acs(geography = "county",
+              variables = "B01001D_001",
+              geometry = FALSE,
+              keep_geo_vars = TRUE)
+
+asian_filtered <- asian %>%
+                select(FIPS = GEOID, 
+                       pop_asian = estimate,
+                       moe_asian = moe)
+
+
+countyGIS <- countyGIS %>%
+  inner_join(asian_filtered, by = "FIPS") %>%
+  mutate(pct_asian = 100 * pop_asian / pop) 
+
+```
+
+**Category 2 variable 1**
+```{r, message=FALSE, warning=FALSE, include=TRUE}
+white_age <- get_acs(geography = "county",
+              variables = c("B01001A_007", "B01001A_008", "B01001A_009", "B01001A_010", "B01001A_011", "B01001A_012", "B01001A_013", "B01001A_014", "B01001A_015", "B01001A_016", "B01001A_022", "B01001A_023", "B01001A_024", "B01001A_025", "B01001A_026", "B01001A_027", "B01001A_028", "B01001A_029", "B01001A_030", "B01001A_031"),
+              geometry = FALSE,
+              keep_geo_vars = TRUE, output = "wide")
+
+whiteage_filtered <- white_age %>% 
+  mutate(estimate = c(B01001A_007E + B01001A_008E + B01001A_009E + B01001A_010E + B01001A_011E + B01001A_012E + B01001A_013E + B01001A_014E + B01001A_015E + B01001A_016E + B01001A_022E + B01001A_023E + B01001A_024E + B01001A_025E + B01001A_026E + B01001A_027E + B01001A_028E + B01001A_029E + B01001A_030E + B01001A_031E)) %>% 
+  mutate(moe = B01001A_007M + B01001A_008M + B01001A_009M + B01001A_010M + B01001A_011M + B01001A_012M + B01001A_013M + B01001A_014M + B01001A_015M + B01001A_016M + B01001A_022M + B01001A_023M + B01001A_024M + B01001A_025M + B01001A_026M + B01001A_027M + B01001A_028M + B01001A_029M + B01001A_030M + B01001A_031M) %>% select(FIPS = GEOID, 
+                       pop_whiteage = estimate,
+                       moe_whiteage = moe)
+                       
+countyGIS <- countyGIS %>%
+  inner_join(whiteage_filtered, by = "FIPS") %>%
+  mutate(pct_whiteage = 100 * pop_whiteage / pop) 
+
+```
+
+**Category 2 variable 2**
+```{r, message=FALSE, warning=FALSE, include=TRUE}
+asian_age <- get_acs(geography = "county",
+              variables = c("B01001D_007", "B01001D_008", "B01001D_009", "B01001D_010", "B01001D_011", "B01001D_012", "B01001D_013", "B01001D_014", "B01001D_015", "B01001D_016", "B01001D_022", "B01001D_023", "B01001D_024", "B01001D_025", "B01001D_026", "B01001D_027", "B01001D_028", "B01001D_029", "B01001D_030", "B01001D_031"),
+              geometry = FALSE,
+              keep_geo_vars = TRUE, output = "wide")
+
+asianage_filtered <- asian_age %>% 
+  mutate(estimate = c(B01001D_007E + B01001D_008E + B01001D_009E + B01001D_010E + B01001D_011E + B01001D_012E + B01001D_013E + B01001D_014E + B01001D_015E + B01001D_016E + B01001D_022E + B01001D_023E + B01001D_024E + B01001D_025E + B01001D_026E + B01001D_027E + B01001D_028E + B01001D_029E + B01001D_030E + B01001D_031E)) %>% 
+  mutate(moe = B01001D_007M + B01001D_008M + B01001D_009M + B01001D_010M + B01001D_011M + B01001D_012M + B01001D_013M + B01001D_014M + B01001D_015M + B01001D_016M + B01001D_022M + B01001D_023M + B01001D_024M + B01001D_025M + B01001D_026M + B01001D_027M + B01001D_028M + B01001D_029M + B01001D_030M + B01001D_031M) %>% select(FIPS = GEOID, 
+                       pop_asianage = estimate,
+                       moe_asianage = moe)
+                       
+
+countyGIS <- countyGIS %>%
+  inner_join(asianage_filtered, by = "FIPS") %>%
+  mutate(pct_asianage = 100 * pop_asianage / pop)
+
+```
+
+**Category 3 variable 1**
+```{r, message=FALSE, warning=FALSE, include=TRUE}
+us_citizen_us_born <- get_acs(geography = "county",
+              variables = "B05001_002",
+              geometry = FALSE,
+              keep_geo_vars = TRUE)
+
+us_citizen_us_born_filtered <- us_citizen_us_born %>%
+                select(FIPS = GEOID, 
+                       pop_us_born = estimate,
+                       moe_us_born = moe)
+
+
+countyGIS <- countyGIS %>%
+  inner_join(us_citizen_us_born_filtered, by = "FIPS") %>%
+  mutate(pct_us_born = 100 * pop_us_born / pop) 
+
+```
+
+**Category 3 variable 2**
+```{r, message=FALSE, warning=FALSE, include=TRUE}
+us_citizen_naturalized <- get_acs(geography = "county",
+              variables = "B05001_005",
+              geometry = FALSE,
+              keep_geo_vars = TRUE)
+
+us_citizen_naturalized_filtered <- us_citizen_naturalized %>%
+                select(FIPS = GEOID, 
+                       pop_us_naturalized = estimate,
+                       moe_us_naturalized = moe)
+
+countyGIS <- countyGIS %>%
+  inner_join(us_citizen_naturalized_filtered, by = "FIPS") %>%
+  mutate(pct_us_naturalized = 100 * pop_us_naturalized / pop) 
+
+```
+
+**Category 4 variable 1**
+```{r, message=FALSE, warning=FALSE, include=TRUE}
+employment_male <- get_acs(geography = "county",
+              variables = "B23001_002",
+              geometry = FALSE,
+              keep_geo_vars = TRUE)
+
+employment_male_filtered <- employment_male %>%
+                select(FIPS = GEOID, 
+                       pop_employment_male = estimate,
+                       moe_employment_male = moe)
+
+
+countyGIS <- countyGIS %>%
+  inner_join(employment_male_filtered, by = "FIPS") %>%
+  mutate(pct_employment_male = 100 * pop_employment_male / pop)
+
+```
+
+**Category 4 variable 2**
+```{r, message=FALSE, warning=FALSE, include=TRUE}
+employment_female <- get_acs(geography = "county",
+              variables = "B23001_088",
+              geometry = FALSE,
+              keep_geo_vars = TRUE)
+
+employment_female_filtered <- employment_female %>%
+                select(FIPS = GEOID, 
+                       pop_employment_female = estimate,
+                       moe_employment_female = moe)
+
+
+countyGIS <- countyGIS %>%
+  inner_join(employment_female_filtered, by = "FIPS") %>%
+  mutate(pct_employment_female = 100 * pop_employment_female / pop) 
+
+```
+
+
+## Election data download and preparation
+
+Now we're going to download 2020 county-level election results from a GitHub repo. You can read more about the data [in the repo](https://github.com/tonmcg/US_County_Level_Election_Results_08-20. 
+```{r, message=FALSE, warning=FALSE, include=TRUE}
+## 2020 Election data
+dta2020 <- read_csv("https://raw.githubusercontent.com/tonmcg/US_County_Level_Election_Results_08-20/master/2020_US_County_Level_Presidential_Results.csv")
+
+## Calculate percentages based on total votes for Trump and Biden (GOP and Dem) only
+##   In some years there have been ties, so we're allowing for that
+##   stdVotes and stdVotesLog will be used to scale color opacitiy from 0 to 1 based on total votes
+
+dta2020 <- dta2020 %>% 
+            mutate(pctGOP = votes_gop/(votes_gop + votes_dem),
+                   totalVotes = votes_gop + votes_dem,
+                   winner = ifelse(dta2020$votes_gop > dta2020$votes_dem,"Trump",
+                                   ifelse(dta2020$votes_gop < dta2020$votes_dem,"Biden", 
+                                          "Tie")),
+                   pctWinner = ifelse(dta2020$votes_gop > dta2020$votes_dem,pctGOP,1-pctGOP),
+                   FontColorWinner = ifelse(dta2020$votes_gop > dta2020$votes_dem,"red",
+                                      ifelse(dta2020$votes_gop < dta2020$votes_dem,"blue",
+                                             "purple")),
+                   pctGOPcategories = ifelse(pctGOP<0.48,"0-48%", 
+                                             ifelse(pctGOP<0.5,"48-50%", 
+                                                    ifelse(pctGOP<0.52, "50-52%",
+                                                           "52-100%"))),
+                   stdVotes = (totalVotes-min(totalVotes))/(max(totalVotes)-min(totalVotes)),
+                   stdVotesLog = (log(totalVotes)-min(log(totalVotes)))/(max(log(totalVotes))-min(log(totalVotes)))
+                   )
+
+
+
+dta2020 <- dta2020 %>% 
+            select(FIPS =  county_fips, pctGOP, totalVotes, winner, pctWinner, pctGOPcategories, FontColorWinner, stdVotes, stdVotesLog)
+
+
+## merge GIS data with voting data
+
+countyGIS <- left_join(countyGIS,dta2020,by="FIPS")
+
+## For maps, drop the following: 
+##   Hawaii (ST FIPS 15) (so our map can zoom in on continental 48 states)
+countyGIS_map <- countyGIS %>% filter(stFIPS != "15")
+
+```
+
+<style>
+.sumstats td {
+  text-align: right;
+  color: green;
+}
+</style>
+
+## Summary Statistics {.sumstats}
+
+```{r,warning=FALSE,message=FALSE,results="asis"}
+countyGIS_stat <- st_drop_geometry(countyGIS)
+
+countyGIS_stat <- countyGIS_stat %>%
+  select(pctGOP, totalVotes, pct_white, pct_asian, pct_whiteage, pct_asianage, pct_us_born, pct_us_naturalized, pct_employment_male, pct_employment_female)
+
+
+stargazer(countyGIS_stat, type = "html",summary.stat = c("mean","sd", "min", "median", "max"))
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

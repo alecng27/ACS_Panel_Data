@@ -1,0 +1,24 @@
+# Election Map
+```{r, message=FALSE, warning=FALSE, include=TRUE}
+popupLabels <- paste0("<b>",countyGIS_map$name," (",countyGIS_map$FIPS,")</b>",
+                    "<br><font color='",countyGIS_map$FontColorWinner,"'>",countyGIS_map$winner, 
+                    ": ",
+                    format(countyGIS_map$pctWinner*100,digits=4, trim=TRUE),
+                    "%</font>",
+                    "<br>Total votes: ", format(countyGIS_map$totalVotes,big.mark=",", trim=TRUE)
+                    ) %>% 
+              lapply(htmltools::HTML)
+```
+
+```{r, message=FALSE, warning=FALSE, include=TRUE}
+pal <- colorBin("RdBu", countyGIS_map$pctGOP, n = 9, reverse=TRUE)
+
+leaflet(countyGIS_map, options = leafletOptions(crsClass = "L.CRS.EPSG3857"), width="100%") %>%
+  addPolygons(weight = 0.5, color = "gray", opacity = 0.7,
+    fillColor = ~pal(pctGOP), fillOpacity = 1, smoothFactor = 0.5,
+    label = popupLabels,
+    labelOptions = labelOptions(direction = "auto")) %>%
+    addPolygons(data = stateGIS,fill = FALSE,color="black",weight = 1) %>%
+    addLegend(pal = pal,values = ~countyGIS_map$pctGOP, opacity = 0.7, title = "% Trump",position = "bottomright")
+
+```

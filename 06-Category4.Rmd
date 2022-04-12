@@ -1,0 +1,103 @@
+# Category 4: Sex and Employment
+
+This category shows the population of the country by sex and employment. The first variable `pct_male_employment` is the percentage of the male population 16 years old or older in the U.S. that is employed. The second variable `pct_female_employment` is the percentage of the female population 16 years old or older in the U.S. that is employed.
+
+
+## Category 4 Variable 1: Male Employment
+
+[Map]
+
+```{r, message=FALSE, warning=FALSE, include=TRUE}
+popupLabels_employment_male <- paste0("<b>",countyGIS_map$name," (",countyGIS_map$FIPS,")</b>",
+                    "<br><font color='",countyGIS_map$FontColorWinner,"'>",countyGIS_map$winner, 
+                    ": ",
+                    format(countyGIS_map$pctWinner*100,digits=4, trim=TRUE),
+                    "%</font>",
+                    "<br>Total votes: ", format(countyGIS_map$totalVotes,big.mark=",", trim=TRUE),
+                    "<br>Percent Male Employment: ", format(round(countyGIS_map$pct_employment_male, 2),big.mark=",", trim=TRUE),
+                    "%</font>"
+                    ) %>% 
+              lapply(htmltools::HTML)
+```
+
+```{r, message=FALSE, warning=FALSE, include=TRUE}
+pal <- colorNumeric(
+  palette = colorRampPalette(c('blue', 'white'))(length(countyGIS_map$pct_employment_male)), 
+  domain = countyGIS_map$pct_employment_male, reverse=TRUE)
+
+leaflet(countyGIS_map, options = leafletOptions(crsClass = "L.CRS.EPSG3857"), width="100%") %>%
+  addPolygons(weight = 0.5, color = "gray", opacity = 0.7,
+    fillColor = ~pal(pct_employment_male), fillOpacity = 1, smoothFactor = 0.5,
+    label = popupLabels_employment_male,
+    labelOptions = labelOptions(direction = "auto")) %>%
+    addPolygons(data = stateGIS,fill = FALSE,color="black",weight = 1) %>%
+    addLegend(pal = pal,values = ~countyGIS_map$pct_employment_male, opacity = 0.7, title = "% Male Employment",position = "bottomright")
+```
+
+[Scatter plot]
+
+```{r, message=FALSE, warning=FALSE, include=TRUE}
+ggplot(countyGIS_stat, aes(pct_employment_male, pctGOP)) + 
+  geom_point(aes(alpha = pct_white, shape = ".")) + 
+               geom_smooth(method = "lm", se = FALSE) 
+```
+
+
+[Regression]
+
+```{r}
+# Estimate regression model
+pct_employment_male_reg <- lm(pctGOP ~ pct_employment_male, data=countyGIS_stat)
+
+# Display model results
+pander(summary(pct_employment_male_reg))
+```
+
+## Category 4 Variable 2: Female Employment
+
+[Map]
+
+```{r, message=FALSE, warning=FALSE, include=TRUE}
+popupLabels_employment_female <- paste0("<b>",countyGIS_map$name," (",countyGIS_map$FIPS,")</b>",
+                    "<br><font color='",countyGIS_map$FontColorWinner,"'>",countyGIS_map$winner, 
+                    ": ",
+                    format(countyGIS_map$pctWinner*100,digits=4, trim=TRUE),
+                    "%</font>",
+                    "<br>Total votes: ", format(countyGIS_map$totalVotes,big.mark=",", trim=TRUE),
+                    "<br>Percent Female Employment: ", format(round(countyGIS_map$pct_employment_female, 2),big.mark=",", trim=TRUE),
+                    "%</font>"
+                    ) %>% 
+              lapply(htmltools::HTML)
+```
+
+```{r, message=FALSE, warning=FALSE, include=TRUE}
+pal2 <- colorNumeric(
+  palette = colorRampPalette(c('red', 'white'))(length(countyGIS_map$pct_employment_female)), 
+  domain = countyGIS_map$pct_employment_female, reverse=TRUE)
+
+leaflet(countyGIS_map, options = leafletOptions(crsClass = "L.CRS.EPSG3857"), width="100%") %>%
+  addPolygons(weight = 0.5, color = "gray", opacity = 0.7,
+    fillColor = ~pal2(pct_employment_female), fillOpacity = 1, smoothFactor = 0.5,
+    label = popupLabels_employment_female,
+    labelOptions = labelOptions(direction = "auto")) %>%
+    addPolygons(data = stateGIS,fill = FALSE,color="black",weight = 1) %>%
+    addLegend(pal = pal2,values = ~countyGIS_map$pct_employment_female, opacity = 0.7, title = "% Female Employment",position = "bottomright")
+```
+
+
+[Scatter plot]
+
+```{r, message=FALSE, warning=FALSE, include=TRUE}
+ggplot(countyGIS_stat, aes(pct_employment_female, pctGOP)) + geom_point(aes(alpha = pct_white, shape = ".")) + geom_smooth(method = "lm", se = FALSE) 
+```
+
+
+[Regression]
+
+```{r}
+# Estimate regression model
+pct_employment_female_reg <- lm(pctGOP ~ pct_employment_female, data=countyGIS_stat)
+
+# Display model results
+pander(summary(pct_employment_female_reg))
+```

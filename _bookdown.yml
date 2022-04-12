@@ -1,0 +1,7 @@
+book_filename: "MapExamples"
+output_dir: docs
+delete_merged_file: true
+new_session: false
+edit: https://github.com/econ380w21/YOUR REPO NAME/edit/master/%s
+view: https://github.com/econ380w21/YOUR REPO NAME/blob/master/%s
+history: https://github.com/econ380w21/YOUR REPO NAME/commits/master/%s

@@ -1,0 +1,104 @@
+# Category 3: NATIVITY AND CITIZENSHIP STATUS
+
+This category shows the population of the country by nativity and citizenship status. The first variable `pct_us_born` is the percentage of the population that is a U.S citizen born in the United States. The second variable `pct_us_naturalized` is the percentage of the population that is a U.S citizen by naturalization.
+
+## Category 3 Variable 1: Native-born U.S citizen 
+
+[Map]
+
+```{r, message=FALSE, warning=FALSE, include=TRUE}
+popupLabels_nativeborn <- paste0("<b>",countyGIS_map$name," (",countyGIS_map$FIPS,")</b>",
+                    "<br><font color='",countyGIS_map$FontColorWinner,"'>",countyGIS_map$winner, 
+                    ": ",
+                    format(countyGIS_map$pctWinner*100,digits=4, trim=TRUE),
+                    "%</font>",
+                    "<br>Total votes: ", format(countyGIS_map$totalVotes,big.mark=",", trim=TRUE),
+                    "<br>Percent Native-born: ", format(round(countyGIS_map$pct_us_born, 2),big.mark=",", trim=TRUE),
+                    "%</font>"
+                    ) %>% 
+              lapply(htmltools::HTML)
+```
+
+```{r, message=FALSE, warning=FALSE, include=TRUE}
+pal <- colorNumeric(
+  palette = colorRampPalette(c('blue', 'white'))(length(countyGIS_map$pct_us_born)), 
+  domain = countyGIS_map$pct_us_born, reverse=TRUE)
+
+leaflet(countyGIS_map, options = leafletOptions(crsClass = "L.CRS.EPSG3857"), width="100%") %>%
+  addPolygons(weight = 0.5, color = "gray", opacity = 0.7,
+    fillColor = ~pal(pct_us_born), fillOpacity = 1, smoothFactor = 0.5,
+    label = popupLabels_nativeborn,
+    labelOptions = labelOptions(direction = "auto")) %>%
+    addPolygons(data = stateGIS,fill = FALSE,color="black",weight = 1) %>%
+    addLegend(pal = pal,values = ~countyGIS_map$pct_us_born, opacity = 0.7, title = "% Native-born",position = "bottomright")
+```
+
+
+[Scatter plot]
+
+```{r}
+ggplot(countyGIS_stat, aes(x=pct_us_born, y=pctGOP)) + geom_point(aes(alpha = pct_white, shape = ".")) + geom_smooth(method = "lm", se=FALSE)
+```
+
+
+[Regression]
+
+```{r}
+# Estimate regression model
+pct_us_born_reg <- lm(pctGOP ~ pct_us_born, data=countyGIS_stat)
+
+# Display model results
+pander(summary(pct_us_born_reg))
+```
+
+## Category 2 Variable 2: Naturalized U.S citizen
+
+[Map]
+
+```{r, message=FALSE, warning=FALSE, include=TRUE}
+popupLabels_naturalized <- paste0("<b>",countyGIS_map$name," (",countyGIS_map$FIPS,")</b>",
+                    "<br><font color='",countyGIS_map$FontColorWinner,"'>",countyGIS_map$winner, 
+                    ": ",
+                    format(countyGIS_map$pctWinner*100,digits=4, trim=TRUE),
+                    "%</font>",
+                    "<br>Total votes: ", format(countyGIS_map$totalVotes,big.mark=",", trim=TRUE),
+                    "<br>Percent Naturalized: ", format(round(countyGIS_map$pct_us_naturalized, 2),big.mark=",", trim=TRUE),
+                    "%</font>"
+                    ) %>% 
+              lapply(htmltools::HTML)
+```
+
+```{r, message=FALSE, warning=FALSE, include=TRUE}
+pal2 <- colorNumeric(
+  palette = colorRampPalette(c('red', 'white'))(length(countyGIS_map$pct_us_naturalized)), 
+  domain = countyGIS_map$pct_us_naturalized, reverse=TRUE)
+
+leaflet(countyGIS_map, options = leafletOptions(crsClass = "L.CRS.EPSG3857"), width="100%") %>%
+  addPolygons(weight = 0.5, color = "gray", opacity = 0.7,
+    fillColor = ~pal2(pct_us_naturalized), fillOpacity = 1, smoothFactor = 0.5,
+    label = popupLabels_naturalized,
+    labelOptions = labelOptions(direction = "auto")) %>%
+    addPolygons(data = stateGIS,fill = FALSE,color="black",weight = 1) %>%
+    addLegend(pal = pal2,values = ~countyGIS_map$pct_us_naturalized, opacity = 0.7, title = "% Naturalized",position = "bottomright")
+```
+
+
+[Scatter plot]
+
+```{r, message=FALSE, warning=FALSE, include=TRUE}
+ggplot(countyGIS_stat, aes(pct_us_naturalized, pctGOP)) + geom_point(aes(alpha = pct_white, shape = ".")) + geom_smooth(method = "lm", se = FALSE) 
+```
+
+
+[Regression]
+
+```{r}
+# Estimate regression model
+pct_us_naturalized_reg <- lm(pctGOP ~ pct_us_naturalized, data=countyGIS_stat)
+
+# Display model results
+pander(summary(pct_us_naturalized_reg))
+```
+
+
+

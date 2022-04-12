@@ -1,0 +1,32 @@
+# Regressions
+
+1. model 1 with $y$ = pctGOP and variable 1 from each category. 
+
+1. model 2 with $y$ = pctGOP and variable 2 from each category. 
+
+1. model 3 with $y$ = log(pctGOP) and variable 1 from each category. 
+
+1. model 4 with $y$ = log(pctGOP) and variable 2 from each category. 
+
+```{r}
+model1 <- lm(pctGOP~pct_white+pct_whiteage+pct_us_born+pct_employment_male,data=countyGIS_stat)
+model2 <- lm(pctGOP~pct_asian+pct_asianage+pct_us_naturalized+pct_employment_female,data=countyGIS_stat)
+model3 <- lm(log(pctGOP)~pct_white+pct_whiteage+pct_us_born+pct_employment_male,data=countyGIS_stat)
+model4 <- lm(log(pctGOP)~pct_asian+pct_asianage+pct_us_naturalized+pct_employment_female,data=countyGIS_stat)
+
+```
+
+```{r,message=FALSE,warning=FALSE,results='asis'}
+stargazer(model1, model2, model3, model4,
+          type = "html", 
+          report=('vc*p'),
+          keep.stat = c("n","rsq","adj.rsq"), 
+          notes = "<em>&#42;p&lt;0.1;&#42;&#42;p&lt;0.05;&#42;&#42;&#42;p&lt;0.01</em>", 
+          notes.append = FALSE, 
+          model.numbers = FALSE, 
+          column.labels = c("(1)","(2)","(3)","(4)"))
+```
+
+
+The correlation between data doesn't mean that one of these variables is the cause for the other. For example, `pct_white` might be correlated to `pctGOP`, but this does not mean that the White population is the cause for the amount of votes the Republican Party gets. There could be a third factor in play not shown in the model. Because of this, we're using the "zero conditional mean" assumption. When we select a random member of the population such as White adults, we expect all confounding variables to be 0, which means there should be no correlation between the either of the two selected variables and a confounding variables.
+

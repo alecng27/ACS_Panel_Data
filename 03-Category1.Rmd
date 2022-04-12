@@ -1,0 +1,138 @@
+# Category 1: Race
+
+This category shows the population of the country by race. The first variable `pct_white` is the percentage of the White population in the U.S. The second variable `pct_asian` is the percentage of the Asian population in the U.S.
+
+
+## Category 1 Variable 1: White Population
+
+[Map]
+
+```{r, message=FALSE, warning=FALSE, include=TRUE}
+popupLabels_white <- paste0("<b>",countyGIS_map$name," (",countyGIS_map$FIPS,")</b>",
+                    "<br><font color='",countyGIS_map$FontColorWinner,"'>",countyGIS_map$winner, 
+                    ": ",
+                    format(countyGIS_map$pctWinner*100,digits=4, trim=TRUE),
+                    "%</font>",
+                    "<br>Total votes: ", format(countyGIS_map$totalVotes,big.mark=",", trim=TRUE),
+                    "<br>Percent White: ", format(round(countyGIS_map$pct_white, 2),big.mark=",", trim=TRUE),
+                    "%</font>"
+                    ) %>% 
+              lapply(htmltools::HTML)
+```
+
+```{r, message=FALSE, warning=FALSE, include=TRUE}
+pal <- colorBin("Greys", countyGIS_map$pct_white,bins = c(0, 20, 40, 60, 80, 100), reverse=TRUE)
+
+
+leaflet(countyGIS_map, options = leafletOptions(crsClass = "L.CRS.EPSG3857"), width="100%") %>%
+  addPolygons(weight = 0.5, color = "gray", opacity = 0.7,
+    fillColor = ~pal(pct_white), fillOpacity = 1, smoothFactor = 0.5,
+    label = popupLabels_white,
+    labelOptions = labelOptions(direction = "auto")) %>%
+    addPolygons(data = stateGIS,fill = FALSE,color="black",weight = 1) %>%
+    addLegend(pal = pal,values = ~countyGIS_map$pct_white, opacity = 0.7, title = "% White",position = "bottomright")
+
+```
+
+
+[Scatter plot]
+
+```{r, message=FALSE, warning=FALSE, include=TRUE}
+pct_white_vs_pctGOP <- ggplot(countyGIS_stat, aes(pct_white, pctGOP)) + 
+  geom_point(aes(alpha = pct_white, shape = ".")) + 
+  geom_smooth(method = "lm", se = FALSE) 
+
+pct_white_vs_pctGOP
+
+```
+
+
+[Regression]
+
+```{r}
+# Estimate regression model
+pct_white_reg <- lm(pctGOP ~ pct_white, data=countyGIS_stat)
+
+# Display model results
+pander(summary(pct_white_reg))
+```
+
+## Category 1 Variable 2: Asian Population
+
+[Map]
+
+```{r, message=FALSE, warning=FALSE, include=TRUE}
+popupLabels_Asian <- paste0("<b>",countyGIS_map$name," (",countyGIS_map$FIPS,")</b>",
+                    "<br><font color='",countyGIS_map$FontColorWinner,"'>",countyGIS_map$winner, 
+                    ": ",
+                    format(countyGIS_map$pctWinner*100,digits=4, trim=TRUE),
+                    "%</font>",
+                    "<br>Total votes: ", format(countyGIS_map$totalVotes,big.mark=",", trim=TRUE),
+                    "<br>Percent Asian: ", format(round(countyGIS_map$pct_asian, 2),big.mark=",", trim=TRUE),
+                    "%</font>"
+                    ) %>% 
+              lapply(htmltools::HTML)
+```
+
+```{r, message=FALSE, warning=FALSE, include=TRUE}
+
+pal2 <- colorNumeric(
+  palette = colorRampPalette(c('yellow', 'white'))(length(countyGIS_map$pct_asian)), 
+  domain = countyGIS_map$pct_asian, reverse=TRUE)
+
+leaflet(countyGIS_map, options = leafletOptions(crsClass = "L.CRS.EPSG3857"), width="100%") %>%
+  addPolygons(weight = 0.5, color = "gray", opacity = 0.7,
+    fillColor = ~pal2(pct_asian), fillOpacity = 1, smoothFactor = 0.5,
+    label = popupLabels_Asian,
+    labelOptions = labelOptions(direction = "auto")) %>%
+    addPolygons(data = stateGIS,fill = FALSE,color="black",weight = 1) %>%
+    addLegend(pal = pal2,values = ~countyGIS_map$pct_asian, opacity = 0.7, title = "% Asian",position = "bottomright")
+```
+
+
+[Scatter plot]
+
+```{r, message=FALSE, warning=FALSE, include=TRUE}
+pct_asian_vs_pctGOP <- ggplot(countyGIS_stat, aes(pct_asian, pctGOP)) + 
+  geom_point(aes(alpha = pct_asian, shape = ".")) + 
+  geom_smooth(method = "lm", se = FALSE) 
+  
+pct_asian_vs_pctGOP
+```
+
+
+[Regression]
+
+```{r}
+# Estimate regression model
+pct_asian_reg <- lm(pctGOP ~ pct_asian, data=countyGIS_stat)
+
+# Display model results
+pander(summary(pct_asian_reg))
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

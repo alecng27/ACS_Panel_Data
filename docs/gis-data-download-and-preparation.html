@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>1.1 GIS data download and preparation | CP</title>
+  <meta name="description" content="1.1 GIS data download and preparation | CP" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="1.1 GIS data download and preparation | CP" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="1.1 GIS data download and preparation | CP" />
+  
+  
+  
+
+<meta name="author" content="Alec Nguyen, Bruno Sotelo, Michael Zhang" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="data.html"/>
+<link rel="next" href="election-data-download-and-preparation.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.0.4.1/leaflet.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Honor Code</a></li>
+<li class="chapter" data-level="1" data-path="data.html"><a href="data.html"><i class="fa fa-check"></i><b>1</b> Data</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="gis-data-download-and-preparation.html"><a href="gis-data-download-and-preparation.html"><i class="fa fa-check"></i><b>1.1</b> GIS data download and preparation</a></li>
+<li class="chapter" data-level="1.2" data-path="election-data-download-and-preparation.html"><a href="election-data-download-and-preparation.html"><i class="fa fa-check"></i><b>1.2</b> Election data download and preparation</a></li>
+<li class="chapter" data-level="1.3" data-path="summary-statistics.html"><a href="summary-statistics.html"><i class="fa fa-check"></i><b>1.3</b> Summary Statistics</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="election-map.html"><a href="election-map.html"><i class="fa fa-check"></i><b>2</b> Election Map</a></li>
+<li class="chapter" data-level="3" data-path="category-1-race.html"><a href="category-1-race.html"><i class="fa fa-check"></i><b>3</b> Category 1: Race</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="category-1-variable-1-white-population.html"><a href="category-1-variable-1-white-population.html"><i class="fa fa-check"></i><b>3.1</b> Category 1 Variable 1: White Population</a></li>
+<li class="chapter" data-level="3.2" data-path="category-1-variable-2-asian-population.html"><a href="category-1-variable-2-asian-population.html"><i class="fa fa-check"></i><b>3.2</b> Category 1 Variable 2: Asian Population</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="category-2-race-and-age.html"><a href="category-2-race-and-age.html"><i class="fa fa-check"></i><b>4</b> Category 2: Race and Age</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="category-2-variable-1-white-adults.html"><a href="category-2-variable-1-white-adults.html"><i class="fa fa-check"></i><b>4.1</b> Category 2 Variable 1: White Adults</a></li>
+<li class="chapter" data-level="4.2" data-path="category-2-variable-2-asian-adults.html"><a href="category-2-variable-2-asian-adults.html"><i class="fa fa-check"></i><b>4.2</b> Category 2 Variable 2: Asian Adults</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="category-3-nativity-and-citizenship-status.html"><a href="category-3-nativity-and-citizenship-status.html"><i class="fa fa-check"></i><b>5</b> Category 3: NATIVITY AND CITIZENSHIP STATUS</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="category-3-variable-1-native-born-u.s-citizen.html"><a href="category-3-variable-1-native-born-u.s-citizen.html"><i class="fa fa-check"></i><b>5.1</b> Category 3 Variable 1: Native-born U.S citizen</a></li>
+<li class="chapter" data-level="5.2" data-path="category-2-variable-2-naturalized-u.s-citizen.html"><a href="category-2-variable-2-naturalized-u.s-citizen.html"><i class="fa fa-check"></i><b>5.2</b> Category 2 Variable 2: Naturalized U.S citizen</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="category-4-sex-and-employment.html"><a href="category-4-sex-and-employment.html"><i class="fa fa-check"></i><b>6</b> Category 4: Sex and Employment</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="category-4-variable-1-male-employment.html"><a href="category-4-variable-1-male-employment.html"><i class="fa fa-check"></i><b>6.1</b> Category 4 Variable 1: Male Employment</a></li>
+<li class="chapter" data-level="6.2" data-path="category-4-variable-2-female-employment.html"><a href="category-4-variable-2-female-employment.html"><i class="fa fa-check"></i><b>6.2</b> Category 4 Variable 2: Female Employment</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="regressions.html"><a href="regressions.html"><i class="fa fa-check"></i><b>7</b> Regressions</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">CP</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="gis-data-download-and-preparation" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> GIS data download and preparation</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="gis-data-download-and-preparation.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="gis-data-download-and-preparation.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(leaflet)</span>
+<span id="cb1-3"><a href="gis-data-download-and-preparation.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rmapshaper)</span>
+<span id="cb1-4"><a href="gis-data-download-and-preparation.html#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidycensus)</span>
+<span id="cb1-5"><a href="gis-data-download-and-preparation.html#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stargazer)</span>
+<span id="cb1-6"><a href="gis-data-download-and-preparation.html#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span>
+<span id="cb1-7"><a href="gis-data-download-and-preparation.html#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb1-8"><a href="gis-data-download-and-preparation.html#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pander)</span>
+<span id="cb1-9"><a href="gis-data-download-and-preparation.html#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="gis-data-download-and-preparation.html#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">tigris_use_cache =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-11"><a href="gis-data-download-and-preparation.html#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="gis-data-download-and-preparation.html#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="do">## turn off scientific notation</span></span>
+<span id="cb1-13"><a href="gis-data-download-and-preparation.html#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">scipen =</span> <span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="gis-data-download-and-preparation.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Download GIS data for maps</span></span>
+<span id="cb2-2"><a href="gis-data-download-and-preparation.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="do">##   geometry = TRUE --&gt; GIS shapefile data to create maps</span></span>
+<span id="cb2-3"><a href="gis-data-download-and-preparation.html#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="do">##   B01001_001: total population</span></span>
+<span id="cb2-4"><a href="gis-data-download-and-preparation.html#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="do">##   </span><span class="al">NOTE</span><span class="do">: When you download the county data for the regressions, use options: geometry = FALSE,keep_geo_vars = FALSE</span></span>
+<span id="cb2-5"><a href="gis-data-download-and-preparation.html#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="gis-data-download-and-preparation.html#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># county-level data for population</span></span>
+<span id="cb2-7"><a href="gis-data-download-and-preparation.html#cb2-7" aria-hidden="true" tabindex="-1"></a>countyGIS <span class="ot">&lt;-</span> <span class="fu">get_acs</span>(<span class="at">geography =</span> <span class="st">&quot;county&quot;</span>,</span>
+<span id="cb2-8"><a href="gis-data-download-and-preparation.html#cb2-8" aria-hidden="true" tabindex="-1"></a>              <span class="at">variables =</span> <span class="st">&quot;B01001_001&quot;</span>,</span>
+<span id="cb2-9"><a href="gis-data-download-and-preparation.html#cb2-9" aria-hidden="true" tabindex="-1"></a>              <span class="at">geometry =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb2-10"><a href="gis-data-download-and-preparation.html#cb2-10" aria-hidden="true" tabindex="-1"></a>              <span class="at">keep_geo_vars =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-11"><a href="gis-data-download-and-preparation.html#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="gis-data-download-and-preparation.html#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co"># State data (for displaying state borders on map)</span></span>
+<span id="cb2-13"><a href="gis-data-download-and-preparation.html#cb2-13" aria-hidden="true" tabindex="-1"></a>stateGIS <span class="ot">&lt;-</span> <span class="fu">get_acs</span>(<span class="at">geography =</span> <span class="st">&quot;state&quot;</span>,</span>
+<span id="cb2-14"><a href="gis-data-download-and-preparation.html#cb2-14" aria-hidden="true" tabindex="-1"></a>              <span class="at">variables =</span> <span class="st">&quot;B01001_001&quot;</span>,</span>
+<span id="cb2-15"><a href="gis-data-download-and-preparation.html#cb2-15" aria-hidden="true" tabindex="-1"></a>              <span class="at">geometry =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb2-16"><a href="gis-data-download-and-preparation.html#cb2-16" aria-hidden="true" tabindex="-1"></a>              <span class="at">keep_geo_vars =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb2-17"><a href="gis-data-download-and-preparation.html#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="gis-data-download-and-preparation.html#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="gis-data-download-and-preparation.html#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="do">## Simplify GIS data to make file sizes smaller. This essentially removes some details along coastlines and very-not-straight borders. </span></span>
+<span id="cb2-20"><a href="gis-data-download-and-preparation.html#cb2-20" aria-hidden="true" tabindex="-1"></a>stateGIS <span class="ot">&lt;-</span> <span class="fu">ms_simplify</span>(stateGIS, <span class="at">keep =</span> <span class="fl">0.01</span>)</span>
+<span id="cb2-21"><a href="gis-data-download-and-preparation.html#cb2-21" aria-hidden="true" tabindex="-1"></a>countyGIS <span class="ot">&lt;-</span> <span class="fu">ms_simplify</span>(countyGIS, <span class="at">keep =</span> <span class="fl">0.01</span>)</span>
+<span id="cb2-22"><a href="gis-data-download-and-preparation.html#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-23"><a href="gis-data-download-and-preparation.html#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-24"><a href="gis-data-download-and-preparation.html#cb2-24" aria-hidden="true" tabindex="-1"></a>countyGIS <span class="ot">&lt;-</span> countyGIS <span class="sc">%&gt;%</span> </span>
+<span id="cb2-25"><a href="gis-data-download-and-preparation.html#cb2-25" aria-hidden="true" tabindex="-1"></a>                <span class="fu">select</span>(<span class="at">FIPS =</span> GEOID, </span>
+<span id="cb2-26"><a href="gis-data-download-and-preparation.html#cb2-26" aria-hidden="true" tabindex="-1"></a>                       <span class="at">stFIPS =</span> STATEFP, </span>
+<span id="cb2-27"><a href="gis-data-download-and-preparation.html#cb2-27" aria-hidden="true" tabindex="-1"></a>                       <span class="at">coFIPS =</span> COUNTYFP, </span>
+<span id="cb2-28"><a href="gis-data-download-and-preparation.html#cb2-28" aria-hidden="true" tabindex="-1"></a>                       <span class="at">coNAME =</span> NAME.x, </span>
+<span id="cb2-29"><a href="gis-data-download-and-preparation.html#cb2-29" aria-hidden="true" tabindex="-1"></a>                       <span class="at">pop =</span> estimate, </span>
+<span id="cb2-30"><a href="gis-data-download-and-preparation.html#cb2-30" aria-hidden="true" tabindex="-1"></a>                       geometry)</span>
+<span id="cb2-31"><a href="gis-data-download-and-preparation.html#cb2-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-32"><a href="gis-data-download-and-preparation.html#cb2-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-33"><a href="gis-data-download-and-preparation.html#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="do">## For maps, drop the following: </span></span>
+<span id="cb2-34"><a href="gis-data-download-and-preparation.html#cb2-34" aria-hidden="true" tabindex="-1"></a><span class="do">##   Puerto Rico (ST FIPS 72) (no election data)</span></span>
+<span id="cb2-35"><a href="gis-data-download-and-preparation.html#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="do">##   Alaska (ST FIPS 02) (voting data isn&#39;t reported by county...we could also map the legislative districts, but we&#39;re not going to since we&#39;d rather have smaller maps without those extra details)</span></span>
+<span id="cb2-36"><a href="gis-data-download-and-preparation.html#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="do">##   Hawaii (ST FIPS 15) (so our map can zoom in on continental 48 states)</span></span>
+<span id="cb2-37"><a href="gis-data-download-and-preparation.html#cb2-37" aria-hidden="true" tabindex="-1"></a>countyGIS <span class="ot">&lt;-</span> countyGIS <span class="sc">%&gt;%</span> <span class="fu">filter</span>(stFIPS <span class="sc">!=</span> <span class="st">&quot;72&quot;</span> <span class="sc">&amp;</span> stFIPS <span class="sc">!=</span> <span class="st">&quot;02&quot;</span>)</span>
+<span id="cb2-38"><a href="gis-data-download-and-preparation.html#cb2-38" aria-hidden="true" tabindex="-1"></a>stateGIS <span class="ot">&lt;-</span> stateGIS <span class="sc">%&gt;%</span> <span class="fu">filter</span>(GEOID <span class="sc">!=</span> <span class="st">&quot;72&quot;</span> <span class="sc">&amp;</span> GEOID <span class="sc">!=</span> <span class="st">&quot;02&quot;</span> <span class="sc">&amp;</span> GEOID <span class="sc">!=</span> <span class="st">&quot;15&quot;</span>)</span>
+<span id="cb2-39"><a href="gis-data-download-and-preparation.html#cb2-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-40"><a href="gis-data-download-and-preparation.html#cb2-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-41"><a href="gis-data-download-and-preparation.html#cb2-41" aria-hidden="true" tabindex="-1"></a><span class="do">## join 2-character state abbreviation and create name = county, ST for labeling maps</span></span>
+<span id="cb2-42"><a href="gis-data-download-and-preparation.html#cb2-42" aria-hidden="true" tabindex="-1"></a>fipsToSTcode <span class="ot">&lt;-</span> fips_codes <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="at">stFIPS =</span> state_code, <span class="at">stNAME =</span> state) <span class="sc">%&gt;%</span> <span class="fu">unique</span>()</span>
+<span id="cb2-43"><a href="gis-data-download-and-preparation.html#cb2-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-44"><a href="gis-data-download-and-preparation.html#cb2-44" aria-hidden="true" tabindex="-1"></a>countyGIS <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(countyGIS,fipsToSTcode,<span class="at">by=</span><span class="st">&quot;stFIPS&quot;</span>)</span>
+<span id="cb2-45"><a href="gis-data-download-and-preparation.html#cb2-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-46"><a href="gis-data-download-and-preparation.html#cb2-46" aria-hidden="true" tabindex="-1"></a>countyGIS <span class="ot">&lt;-</span> countyGIS <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">name =</span> <span class="fu">paste0</span>(coNAME,<span class="st">&quot;, &quot;</span>, stNAME))</span>
+<span id="cb2-47"><a href="gis-data-download-and-preparation.html#cb2-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-48"><a href="gis-data-download-and-preparation.html#cb2-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-49"><a href="gis-data-download-and-preparation.html#cb2-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-50"><a href="gis-data-download-and-preparation.html#cb2-50" aria-hidden="true" tabindex="-1"></a><span class="do">## </span><span class="al">NOTE</span><span class="do">: If you don&#39;t use keep_geo_vars = TRUE, you don&#39;t get separate STATEFP and COUNTYFP, but you can use mutate() and create stFIPS = substr(GEOID,1,2) and coFIPS = substr(GEOID,3,5)</span></span></code></pre></div>
+<p><strong>Category 1 variable 1</strong></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="gis-data-download-and-preparation.html#cb3-1" aria-hidden="true" tabindex="-1"></a>white <span class="ot">&lt;-</span> <span class="fu">get_acs</span>(<span class="at">geography =</span> <span class="st">&quot;county&quot;</span>,</span>
+<span id="cb3-2"><a href="gis-data-download-and-preparation.html#cb3-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">variables =</span> <span class="st">&quot;B01001A_001&quot;</span>,</span>
+<span id="cb3-3"><a href="gis-data-download-and-preparation.html#cb3-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">geometry =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb3-4"><a href="gis-data-download-and-preparation.html#cb3-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">keep_geo_vars =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb3-5"><a href="gis-data-download-and-preparation.html#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="gis-data-download-and-preparation.html#cb3-6" aria-hidden="true" tabindex="-1"></a>white_filtered <span class="ot">&lt;-</span> white <span class="sc">%&gt;%</span></span>
+<span id="cb3-7"><a href="gis-data-download-and-preparation.html#cb3-7" aria-hidden="true" tabindex="-1"></a>                <span class="fu">select</span>(<span class="at">FIPS =</span> GEOID, </span>
+<span id="cb3-8"><a href="gis-data-download-and-preparation.html#cb3-8" aria-hidden="true" tabindex="-1"></a>                       <span class="at">pop_white =</span> estimate,</span>
+<span id="cb3-9"><a href="gis-data-download-and-preparation.html#cb3-9" aria-hidden="true" tabindex="-1"></a>                       <span class="at">moe_white =</span> moe)</span>
+<span id="cb3-10"><a href="gis-data-download-and-preparation.html#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="gis-data-download-and-preparation.html#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="gis-data-download-and-preparation.html#cb3-12" aria-hidden="true" tabindex="-1"></a>countyGIS <span class="ot">&lt;-</span> countyGIS <span class="sc">%&gt;%</span></span>
+<span id="cb3-13"><a href="gis-data-download-and-preparation.html#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(white_filtered, <span class="at">by =</span> <span class="st">&quot;FIPS&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-14"><a href="gis-data-download-and-preparation.html#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pct_white =</span> <span class="dv">100</span> <span class="sc">*</span> pop_white <span class="sc">/</span> pop) </span></code></pre></div>
+<p><strong>Category 1 variable 2</strong></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="gis-data-download-and-preparation.html#cb4-1" aria-hidden="true" tabindex="-1"></a>asian <span class="ot">&lt;-</span> <span class="fu">get_acs</span>(<span class="at">geography =</span> <span class="st">&quot;county&quot;</span>,</span>
+<span id="cb4-2"><a href="gis-data-download-and-preparation.html#cb4-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">variables =</span> <span class="st">&quot;B01001D_001&quot;</span>,</span>
+<span id="cb4-3"><a href="gis-data-download-and-preparation.html#cb4-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">geometry =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb4-4"><a href="gis-data-download-and-preparation.html#cb4-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">keep_geo_vars =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb4-5"><a href="gis-data-download-and-preparation.html#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="gis-data-download-and-preparation.html#cb4-6" aria-hidden="true" tabindex="-1"></a>asian_filtered <span class="ot">&lt;-</span> asian <span class="sc">%&gt;%</span></span>
+<span id="cb4-7"><a href="gis-data-download-and-preparation.html#cb4-7" aria-hidden="true" tabindex="-1"></a>                <span class="fu">select</span>(<span class="at">FIPS =</span> GEOID, </span>
+<span id="cb4-8"><a href="gis-data-download-and-preparation.html#cb4-8" aria-hidden="true" tabindex="-1"></a>                       <span class="at">pop_asian =</span> estimate,</span>
+<span id="cb4-9"><a href="gis-data-download-and-preparation.html#cb4-9" aria-hidden="true" tabindex="-1"></a>                       <span class="at">moe_asian =</span> moe)</span>
+<span id="cb4-10"><a href="gis-data-download-and-preparation.html#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="gis-data-download-and-preparation.html#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="gis-data-download-and-preparation.html#cb4-12" aria-hidden="true" tabindex="-1"></a>countyGIS <span class="ot">&lt;-</span> countyGIS <span class="sc">%&gt;%</span></span>
+<span id="cb4-13"><a href="gis-data-download-and-preparation.html#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(asian_filtered, <span class="at">by =</span> <span class="st">&quot;FIPS&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-14"><a href="gis-data-download-and-preparation.html#cb4-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pct_asian =</span> <span class="dv">100</span> <span class="sc">*</span> pop_asian <span class="sc">/</span> pop) </span></code></pre></div>
+<p><strong>Category 2 variable 1</strong></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="gis-data-download-and-preparation.html#cb5-1" aria-hidden="true" tabindex="-1"></a>white_age <span class="ot">&lt;-</span> <span class="fu">get_acs</span>(<span class="at">geography =</span> <span class="st">&quot;county&quot;</span>,</span>
+<span id="cb5-2"><a href="gis-data-download-and-preparation.html#cb5-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">variables =</span> <span class="fu">c</span>(<span class="st">&quot;B01001A_007&quot;</span>, <span class="st">&quot;B01001A_008&quot;</span>, <span class="st">&quot;B01001A_009&quot;</span>, <span class="st">&quot;B01001A_010&quot;</span>, <span class="st">&quot;B01001A_011&quot;</span>, <span class="st">&quot;B01001A_012&quot;</span>, <span class="st">&quot;B01001A_013&quot;</span>, <span class="st">&quot;B01001A_014&quot;</span>, <span class="st">&quot;B01001A_015&quot;</span>, <span class="st">&quot;B01001A_016&quot;</span>, <span class="st">&quot;B01001A_022&quot;</span>, <span class="st">&quot;B01001A_023&quot;</span>, <span class="st">&quot;B01001A_024&quot;</span>, <span class="st">&quot;B01001A_025&quot;</span>, <span class="st">&quot;B01001A_026&quot;</span>, <span class="st">&quot;B01001A_027&quot;</span>, <span class="st">&quot;B01001A_028&quot;</span>, <span class="st">&quot;B01001A_029&quot;</span>, <span class="st">&quot;B01001A_030&quot;</span>, <span class="st">&quot;B01001A_031&quot;</span>),</span>
+<span id="cb5-3"><a href="gis-data-download-and-preparation.html#cb5-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">geometry =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb5-4"><a href="gis-data-download-and-preparation.html#cb5-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">keep_geo_vars =</span> <span class="cn">TRUE</span>, <span class="at">output =</span> <span class="st">&quot;wide&quot;</span>)</span>
+<span id="cb5-5"><a href="gis-data-download-and-preparation.html#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="gis-data-download-and-preparation.html#cb5-6" aria-hidden="true" tabindex="-1"></a>whiteage_filtered <span class="ot">&lt;-</span> white_age <span class="sc">%&gt;%</span> </span>
+<span id="cb5-7"><a href="gis-data-download-and-preparation.html#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">estimate =</span> <span class="fu">c</span>(B01001A_007E <span class="sc">+</span> B01001A_008E <span class="sc">+</span> B01001A_009E <span class="sc">+</span> B01001A_010E <span class="sc">+</span> B01001A_011E <span class="sc">+</span> B01001A_012E <span class="sc">+</span> B01001A_013E <span class="sc">+</span> B01001A_014E <span class="sc">+</span> B01001A_015E <span class="sc">+</span> B01001A_016E <span class="sc">+</span> B01001A_022E <span class="sc">+</span> B01001A_023E <span class="sc">+</span> B01001A_024E <span class="sc">+</span> B01001A_025E <span class="sc">+</span> B01001A_026E <span class="sc">+</span> B01001A_027E <span class="sc">+</span> B01001A_028E <span class="sc">+</span> B01001A_029E <span class="sc">+</span> B01001A_030E <span class="sc">+</span> B01001A_031E)) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-8"><a href="gis-data-download-and-preparation.html#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">moe =</span> B01001A_007M <span class="sc">+</span> B01001A_008M <span class="sc">+</span> B01001A_009M <span class="sc">+</span> B01001A_010M <span class="sc">+</span> B01001A_011M <span class="sc">+</span> B01001A_012M <span class="sc">+</span> B01001A_013M <span class="sc">+</span> B01001A_014M <span class="sc">+</span> B01001A_015M <span class="sc">+</span> B01001A_016M <span class="sc">+</span> B01001A_022M <span class="sc">+</span> B01001A_023M <span class="sc">+</span> B01001A_024M <span class="sc">+</span> B01001A_025M <span class="sc">+</span> B01001A_026M <span class="sc">+</span> B01001A_027M <span class="sc">+</span> B01001A_028M <span class="sc">+</span> B01001A_029M <span class="sc">+</span> B01001A_030M <span class="sc">+</span> B01001A_031M) <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="at">FIPS =</span> GEOID, </span>
+<span id="cb5-9"><a href="gis-data-download-and-preparation.html#cb5-9" aria-hidden="true" tabindex="-1"></a>                       <span class="at">pop_whiteage =</span> estimate,</span>
+<span id="cb5-10"><a href="gis-data-download-and-preparation.html#cb5-10" aria-hidden="true" tabindex="-1"></a>                       <span class="at">moe_whiteage =</span> moe)</span>
+<span id="cb5-11"><a href="gis-data-download-and-preparation.html#cb5-11" aria-hidden="true" tabindex="-1"></a>                       </span>
+<span id="cb5-12"><a href="gis-data-download-and-preparation.html#cb5-12" aria-hidden="true" tabindex="-1"></a>countyGIS <span class="ot">&lt;-</span> countyGIS <span class="sc">%&gt;%</span></span>
+<span id="cb5-13"><a href="gis-data-download-and-preparation.html#cb5-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(whiteage_filtered, <span class="at">by =</span> <span class="st">&quot;FIPS&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-14"><a href="gis-data-download-and-preparation.html#cb5-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pct_whiteage =</span> <span class="dv">100</span> <span class="sc">*</span> pop_whiteage <span class="sc">/</span> pop) </span></code></pre></div>
+<p><strong>Category 2 variable 2</strong></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="gis-data-download-and-preparation.html#cb6-1" aria-hidden="true" tabindex="-1"></a>asian_age <span class="ot">&lt;-</span> <span class="fu">get_acs</span>(<span class="at">geography =</span> <span class="st">&quot;county&quot;</span>,</span>
+<span id="cb6-2"><a href="gis-data-download-and-preparation.html#cb6-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">variables =</span> <span class="fu">c</span>(<span class="st">&quot;B01001D_007&quot;</span>, <span class="st">&quot;B01001D_008&quot;</span>, <span class="st">&quot;B01001D_009&quot;</span>, <span class="st">&quot;B01001D_010&quot;</span>, <span class="st">&quot;B01001D_011&quot;</span>, <span class="st">&quot;B01001D_012&quot;</span>, <span class="st">&quot;B01001D_013&quot;</span>, <span class="st">&quot;B01001D_014&quot;</span>, <span class="st">&quot;B01001D_015&quot;</span>, <span class="st">&quot;B01001D_016&quot;</span>, <span class="st">&quot;B01001D_022&quot;</span>, <span class="st">&quot;B01001D_023&quot;</span>, <span class="st">&quot;B01001D_024&quot;</span>, <span class="st">&quot;B01001D_025&quot;</span>, <span class="st">&quot;B01001D_026&quot;</span>, <span class="st">&quot;B01001D_027&quot;</span>, <span class="st">&quot;B01001D_028&quot;</span>, <span class="st">&quot;B01001D_029&quot;</span>, <span class="st">&quot;B01001D_030&quot;</span>, <span class="st">&quot;B01001D_031&quot;</span>),</span>
+<span id="cb6-3"><a href="gis-data-download-and-preparation.html#cb6-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">geometry =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb6-4"><a href="gis-data-download-and-preparation.html#cb6-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">keep_geo_vars =</span> <span class="cn">TRUE</span>, <span class="at">output =</span> <span class="st">&quot;wide&quot;</span>)</span>
+<span id="cb6-5"><a href="gis-data-download-and-preparation.html#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="gis-data-download-and-preparation.html#cb6-6" aria-hidden="true" tabindex="-1"></a>asianage_filtered <span class="ot">&lt;-</span> asian_age <span class="sc">%&gt;%</span> </span>
+<span id="cb6-7"><a href="gis-data-download-and-preparation.html#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">estimate =</span> <span class="fu">c</span>(B01001D_007E <span class="sc">+</span> B01001D_008E <span class="sc">+</span> B01001D_009E <span class="sc">+</span> B01001D_010E <span class="sc">+</span> B01001D_011E <span class="sc">+</span> B01001D_012E <span class="sc">+</span> B01001D_013E <span class="sc">+</span> B01001D_014E <span class="sc">+</span> B01001D_015E <span class="sc">+</span> B01001D_016E <span class="sc">+</span> B01001D_022E <span class="sc">+</span> B01001D_023E <span class="sc">+</span> B01001D_024E <span class="sc">+</span> B01001D_025E <span class="sc">+</span> B01001D_026E <span class="sc">+</span> B01001D_027E <span class="sc">+</span> B01001D_028E <span class="sc">+</span> B01001D_029E <span class="sc">+</span> B01001D_030E <span class="sc">+</span> B01001D_031E)) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-8"><a href="gis-data-download-and-preparation.html#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">moe =</span> B01001D_007M <span class="sc">+</span> B01001D_008M <span class="sc">+</span> B01001D_009M <span class="sc">+</span> B01001D_010M <span class="sc">+</span> B01001D_011M <span class="sc">+</span> B01001D_012M <span class="sc">+</span> B01001D_013M <span class="sc">+</span> B01001D_014M <span class="sc">+</span> B01001D_015M <span class="sc">+</span> B01001D_016M <span class="sc">+</span> B01001D_022M <span class="sc">+</span> B01001D_023M <span class="sc">+</span> B01001D_024M <span class="sc">+</span> B01001D_025M <span class="sc">+</span> B01001D_026M <span class="sc">+</span> B01001D_027M <span class="sc">+</span> B01001D_028M <span class="sc">+</span> B01001D_029M <span class="sc">+</span> B01001D_030M <span class="sc">+</span> B01001D_031M) <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="at">FIPS =</span> GEOID, </span>
+<span id="cb6-9"><a href="gis-data-download-and-preparation.html#cb6-9" aria-hidden="true" tabindex="-1"></a>                       <span class="at">pop_asianage =</span> estimate,</span>
+<span id="cb6-10"><a href="gis-data-download-and-preparation.html#cb6-10" aria-hidden="true" tabindex="-1"></a>                       <span class="at">moe_asianage =</span> moe)</span>
+<span id="cb6-11"><a href="gis-data-download-and-preparation.html#cb6-11" aria-hidden="true" tabindex="-1"></a>                       </span>
+<span id="cb6-12"><a href="gis-data-download-and-preparation.html#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="gis-data-download-and-preparation.html#cb6-13" aria-hidden="true" tabindex="-1"></a>countyGIS <span class="ot">&lt;-</span> countyGIS <span class="sc">%&gt;%</span></span>
+<span id="cb6-14"><a href="gis-data-download-and-preparation.html#cb6-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(asianage_filtered, <span class="at">by =</span> <span class="st">&quot;FIPS&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb6-15"><a href="gis-data-download-and-preparation.html#cb6-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pct_asianage =</span> <span class="dv">100</span> <span class="sc">*</span> pop_asianage <span class="sc">/</span> pop)</span></code></pre></div>
+<p><strong>Category 3 variable 1</strong></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="gis-data-download-and-preparation.html#cb7-1" aria-hidden="true" tabindex="-1"></a>us_citizen_us_born <span class="ot">&lt;-</span> <span class="fu">get_acs</span>(<span class="at">geography =</span> <span class="st">&quot;county&quot;</span>,</span>
+<span id="cb7-2"><a href="gis-data-download-and-preparation.html#cb7-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">variables =</span> <span class="st">&quot;B05001_002&quot;</span>,</span>
+<span id="cb7-3"><a href="gis-data-download-and-preparation.html#cb7-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">geometry =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb7-4"><a href="gis-data-download-and-preparation.html#cb7-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">keep_geo_vars =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb7-5"><a href="gis-data-download-and-preparation.html#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="gis-data-download-and-preparation.html#cb7-6" aria-hidden="true" tabindex="-1"></a>us_citizen_us_born_filtered <span class="ot">&lt;-</span> us_citizen_us_born <span class="sc">%&gt;%</span></span>
+<span id="cb7-7"><a href="gis-data-download-and-preparation.html#cb7-7" aria-hidden="true" tabindex="-1"></a>                <span class="fu">select</span>(<span class="at">FIPS =</span> GEOID, </span>
+<span id="cb7-8"><a href="gis-data-download-and-preparation.html#cb7-8" aria-hidden="true" tabindex="-1"></a>                       <span class="at">pop_us_born =</span> estimate,</span>
+<span id="cb7-9"><a href="gis-data-download-and-preparation.html#cb7-9" aria-hidden="true" tabindex="-1"></a>                       <span class="at">moe_us_born =</span> moe)</span>
+<span id="cb7-10"><a href="gis-data-download-and-preparation.html#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="gis-data-download-and-preparation.html#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-12"><a href="gis-data-download-and-preparation.html#cb7-12" aria-hidden="true" tabindex="-1"></a>countyGIS <span class="ot">&lt;-</span> countyGIS <span class="sc">%&gt;%</span></span>
+<span id="cb7-13"><a href="gis-data-download-and-preparation.html#cb7-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(us_citizen_us_born_filtered, <span class="at">by =</span> <span class="st">&quot;FIPS&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb7-14"><a href="gis-data-download-and-preparation.html#cb7-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pct_us_born =</span> <span class="dv">100</span> <span class="sc">*</span> pop_us_born <span class="sc">/</span> pop) </span></code></pre></div>
+<p><strong>Category 3 variable 2</strong></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="gis-data-download-and-preparation.html#cb8-1" aria-hidden="true" tabindex="-1"></a>us_citizen_naturalized <span class="ot">&lt;-</span> <span class="fu">get_acs</span>(<span class="at">geography =</span> <span class="st">&quot;county&quot;</span>,</span>
+<span id="cb8-2"><a href="gis-data-download-and-preparation.html#cb8-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">variables =</span> <span class="st">&quot;B05001_005&quot;</span>,</span>
+<span id="cb8-3"><a href="gis-data-download-and-preparation.html#cb8-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">geometry =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb8-4"><a href="gis-data-download-and-preparation.html#cb8-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">keep_geo_vars =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb8-5"><a href="gis-data-download-and-preparation.html#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="gis-data-download-and-preparation.html#cb8-6" aria-hidden="true" tabindex="-1"></a>us_citizen_naturalized_filtered <span class="ot">&lt;-</span> us_citizen_naturalized <span class="sc">%&gt;%</span></span>
+<span id="cb8-7"><a href="gis-data-download-and-preparation.html#cb8-7" aria-hidden="true" tabindex="-1"></a>                <span class="fu">select</span>(<span class="at">FIPS =</span> GEOID, </span>
+<span id="cb8-8"><a href="gis-data-download-and-preparation.html#cb8-8" aria-hidden="true" tabindex="-1"></a>                       <span class="at">pop_us_naturalized =</span> estimate,</span>
+<span id="cb8-9"><a href="gis-data-download-and-preparation.html#cb8-9" aria-hidden="true" tabindex="-1"></a>                       <span class="at">moe_us_naturalized =</span> moe)</span>
+<span id="cb8-10"><a href="gis-data-download-and-preparation.html#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="gis-data-download-and-preparation.html#cb8-11" aria-hidden="true" tabindex="-1"></a>countyGIS <span class="ot">&lt;-</span> countyGIS <span class="sc">%&gt;%</span></span>
+<span id="cb8-12"><a href="gis-data-download-and-preparation.html#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(us_citizen_naturalized_filtered, <span class="at">by =</span> <span class="st">&quot;FIPS&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb8-13"><a href="gis-data-download-and-preparation.html#cb8-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pct_us_naturalized =</span> <span class="dv">100</span> <span class="sc">*</span> pop_us_naturalized <span class="sc">/</span> pop) </span></code></pre></div>
+<p><strong>Category 4 variable 1</strong></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="gis-data-download-and-preparation.html#cb9-1" aria-hidden="true" tabindex="-1"></a>employment_male <span class="ot">&lt;-</span> <span class="fu">get_acs</span>(<span class="at">geography =</span> <span class="st">&quot;county&quot;</span>,</span>
+<span id="cb9-2"><a href="gis-data-download-and-preparation.html#cb9-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">variables =</span> <span class="st">&quot;B23001_002&quot;</span>,</span>
+<span id="cb9-3"><a href="gis-data-download-and-preparation.html#cb9-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">geometry =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb9-4"><a href="gis-data-download-and-preparation.html#cb9-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">keep_geo_vars =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb9-5"><a href="gis-data-download-and-preparation.html#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="gis-data-download-and-preparation.html#cb9-6" aria-hidden="true" tabindex="-1"></a>employment_male_filtered <span class="ot">&lt;-</span> employment_male <span class="sc">%&gt;%</span></span>
+<span id="cb9-7"><a href="gis-data-download-and-preparation.html#cb9-7" aria-hidden="true" tabindex="-1"></a>                <span class="fu">select</span>(<span class="at">FIPS =</span> GEOID, </span>
+<span id="cb9-8"><a href="gis-data-download-and-preparation.html#cb9-8" aria-hidden="true" tabindex="-1"></a>                       <span class="at">pop_employment_male =</span> estimate,</span>
+<span id="cb9-9"><a href="gis-data-download-and-preparation.html#cb9-9" aria-hidden="true" tabindex="-1"></a>                       <span class="at">moe_employment_male =</span> moe)</span>
+<span id="cb9-10"><a href="gis-data-download-and-preparation.html#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="gis-data-download-and-preparation.html#cb9-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-12"><a href="gis-data-download-and-preparation.html#cb9-12" aria-hidden="true" tabindex="-1"></a>countyGIS <span class="ot">&lt;-</span> countyGIS <span class="sc">%&gt;%</span></span>
+<span id="cb9-13"><a href="gis-data-download-and-preparation.html#cb9-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(employment_male_filtered, <span class="at">by =</span> <span class="st">&quot;FIPS&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb9-14"><a href="gis-data-download-and-preparation.html#cb9-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pct_employment_male =</span> <span class="dv">100</span> <span class="sc">*</span> pop_employment_male <span class="sc">/</span> pop)</span></code></pre></div>
+<p><strong>Category 4 variable 2</strong></p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="gis-data-download-and-preparation.html#cb10-1" aria-hidden="true" tabindex="-1"></a>employment_female <span class="ot">&lt;-</span> <span class="fu">get_acs</span>(<span class="at">geography =</span> <span class="st">&quot;county&quot;</span>,</span>
+<span id="cb10-2"><a href="gis-data-download-and-preparation.html#cb10-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">variables =</span> <span class="st">&quot;B23001_088&quot;</span>,</span>
+<span id="cb10-3"><a href="gis-data-download-and-preparation.html#cb10-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">geometry =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb10-4"><a href="gis-data-download-and-preparation.html#cb10-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">keep_geo_vars =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb10-5"><a href="gis-data-download-and-preparation.html#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="gis-data-download-and-preparation.html#cb10-6" aria-hidden="true" tabindex="-1"></a>employment_female_filtered <span class="ot">&lt;-</span> employment_female <span class="sc">%&gt;%</span></span>
+<span id="cb10-7"><a href="gis-data-download-and-preparation.html#cb10-7" aria-hidden="true" tabindex="-1"></a>                <span class="fu">select</span>(<span class="at">FIPS =</span> GEOID, </span>
+<span id="cb10-8"><a href="gis-data-download-and-preparation.html#cb10-8" aria-hidden="true" tabindex="-1"></a>                       <span class="at">pop_employment_female =</span> estimate,</span>
+<span id="cb10-9"><a href="gis-data-download-and-preparation.html#cb10-9" aria-hidden="true" tabindex="-1"></a>                       <span class="at">moe_employment_female =</span> moe)</span>
+<span id="cb10-10"><a href="gis-data-download-and-preparation.html#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-11"><a href="gis-data-download-and-preparation.html#cb10-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-12"><a href="gis-data-download-and-preparation.html#cb10-12" aria-hidden="true" tabindex="-1"></a>countyGIS <span class="ot">&lt;-</span> countyGIS <span class="sc">%&gt;%</span></span>
+<span id="cb10-13"><a href="gis-data-download-and-preparation.html#cb10-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(employment_female_filtered, <span class="at">by =</span> <span class="st">&quot;FIPS&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb10-14"><a href="gis-data-download-and-preparation.html#cb10-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pct_employment_female =</span> <span class="dv">100</span> <span class="sc">*</span> pop_employment_female <span class="sc">/</span> pop) </span></code></pre></div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="election-data-download-and-preparation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/econ380w21/YOUR REPO NAME/edit/master/01-Data.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": "https://github.com/econ380w21/YOUR REPO NAME/commits/master/01-Data.Rmd",
+"text": null
+},
+"view": {
+"link": "https://github.com/econ380w21/YOUR REPO NAME/blob/master/01-Data.Rmd",
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

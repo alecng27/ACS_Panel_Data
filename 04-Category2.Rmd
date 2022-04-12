@@ -1,0 +1,116 @@
+# Category 2: Race and Age
+
+This category shows the population of the country by race and age. The first variable `pct_whiteage` is the percentage of the White population in the U.S that are 18 years old or older. The second variable `pct_asian` is the percentage of the Asian population in the U.S. that are 18 years old or older.
+
+## Category 2 Variable 1: White Adults
+
+[map]
+
+```{r, message=FALSE, warning=FALSE, include=TRUE}
+popupLabels_WhiteAge <- paste0("<b>",countyGIS_map$name," (",countyGIS_map$FIPS,")</b>",
+                    "<br><font color='",countyGIS_map$FontColorWinner,"'>",countyGIS_map$winner, 
+                    ": ",
+                    format(countyGIS_map$pctWinner*100,digits=4, trim=TRUE),
+                    "%</font>",
+                    "<br>Total votes: ", format(countyGIS_map$totalVotes,big.mark=",", trim=TRUE),
+                    "<br>Percent White Age: ", format(round(countyGIS_map$pct_whiteage, 2),big.mark=",", trim=TRUE),
+                    "%</font>"
+                    ) %>% 
+              lapply(htmltools::HTML)
+```
+
+```{r, message=FALSE, warning=FALSE, include=TRUE}
+
+pal <- colorNumeric(
+  palette = colorRampPalette(c('Pink', 'white'))(length(countyGIS_map$pct_whiteage)), 
+  domain = countyGIS_map$pct_whiteage, reverse=TRUE)
+
+leaflet(countyGIS_map, options = leafletOptions(crsClass = "L.CRS.EPSG3857"), width="100%") %>%
+  addPolygons(weight = 0.5, color = "gray", opacity = 0.7,
+    fillColor = ~pal(pct_whiteage), fillOpacity = 1, smoothFactor = 0.5,
+    label = popupLabels_WhiteAge,
+    labelOptions = labelOptions(direction = "auto")) %>%
+    addPolygons(data = stateGIS,fill = FALSE,color="black",weight = 1) %>%
+    addLegend(pal = pal,values = ~countyGIS_map$pct_whiteage, opacity = 0.7, title = "% White Age",position = "bottomright")
+
+```
+
+
+[Scatter plot]
+
+```{r, message=FALSE, warning=FALSE, include=TRUE}
+pct_whiteage_vs_pctGOP <- ggplot(countyGIS_stat, aes(pct_whiteage, pctGOP)) + 
+  geom_point(aes(alpha = pct_whiteage, shape = ".")) + 
+  geom_smooth(method = "lm", se = FALSE) 
+  
+pct_whiteage_vs_pctGOP
+```
+
+
+[Regression]
+
+```{r}
+# Estimate regression model
+pct_whiteage_reg <- lm(pctGOP ~ pct_whiteage, data=countyGIS_stat)
+
+# Display model results
+pander(summary(pct_whiteage_reg))
+```
+
+## Category 2 Variable 2: Asian Adults
+
+[Map]
+
+```{r, message=FALSE, warning=FALSE, include=TRUE}
+popupLabels_AsianAge <- paste0("<b>",countyGIS_map$name," (",countyGIS_map$FIPS,")</b>",
+                    "<br><font color='",countyGIS_map$FontColorWinner,"'>",countyGIS_map$winner, 
+                    ": ",
+                    format(countyGIS_map$pctWinner*100,digits=4, trim=TRUE),
+                    "%</font>",
+                    "<br>Total votes: ", format(countyGIS_map$totalVotes,big.mark=",", trim=TRUE),
+                    "<br>Percent Asian Age: ", format(round(countyGIS_map$pct_asianage, 2),big.mark=",", trim=TRUE),
+                    "%</font>"
+                    ) %>% 
+              lapply(htmltools::HTML)
+```
+
+```{r, message=FALSE, warning=FALSE, include=TRUE}
+pal <- colorNumeric(
+  palette = colorRampPalette(c('Orange', 'White'))(length(countyGIS_map$pct_asianage)), 
+  domain = countyGIS_map$pct_asianage, reverse=TRUE)
+
+leaflet(countyGIS_map, options = leafletOptions(crsClass = "L.CRS.EPSG3857"), width="100%") %>%
+  addPolygons(weight = 0.5, color = "gray", opacity = 0.7,
+    fillColor = ~pal(pct_asianage), fillOpacity = 1, smoothFactor = 0.5,
+    label = popupLabels_AsianAge,
+    labelOptions = labelOptions(direction = "auto")) %>%
+    addPolygons(data = stateGIS,fill = FALSE,color="black",weight = 1) %>%
+    addLegend(pal = pal,values = ~countyGIS_map$pct_asianage, opacity = 0.7, title = "% Asian Age",position = "bottomright")
+
+```
+
+
+[Scatter plot]
+
+```{r, message=FALSE, warning=FALSE, include=TRUE}
+pct_asianage_vs_pctGOP <- ggplot(countyGIS_stat, aes(pct_asianage, pctGOP)) + 
+  geom_point(aes(alpha = pct_asianage, shape = ".")) + 
+  geom_smooth(method = "lm", se = FALSE) 
+  
+pct_asianage_vs_pctGOP
+```
+
+
+[Regression]
+
+```{r}
+# Estimate regression model
+pct_asianage_reg <- lm(pctGOP ~ pct_asianage, data=countyGIS_stat)
+
+# Display model results
+pander(summary(pct_asianage_reg))
+```
+
+
+
+
