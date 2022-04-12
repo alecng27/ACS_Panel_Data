@@ -1,7 +1,7 @@
-book_filename: "MapExamples"
+book_filename: "ACS_Panel_Data"
 output_dir: docs
 delete_merged_file: true
 new_session: false
-edit: https://github.com/econ380w21/YOUR REPO NAME/edit/master/%s
-view: https://github.com/econ380w21/YOUR REPO NAME/blob/master/%s
-history: https://github.com/econ380w21/YOUR REPO NAME/commits/master/%s
+edit: https://github.com/alecng27/ACS_Panel_Data/edit/master/%s
+view: https://github.com/alecng27/ACS_Panel_Data/blob/master/%s
+history: https://github.com/alecng27/ACS_Panel_Data/commits/master/%s
