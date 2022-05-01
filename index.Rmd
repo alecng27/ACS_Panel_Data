@@ -17,16 +17,16 @@ For this project, I utilized the 2019 ACS data to explore and compare the 2020 U
 
 https://alecng27.github.io/ACS_Panel_Data/
 
-**Contact**
+**Author**
 
 Alec Nguyen
 
-Economics, Lawrence University
+Economics & Data Science B.A, Lawrence University
 
 alec.nguyen27@gmail.com
 
 [LinkedIn](https://www.linkedin.com/in/alec-nguyen-about/)
 
-[Portfolio](https://alecng27.github.io/Portfolio/)
+[Project Portfolio](https://alecng27.github.io/Portfolio/)
 
 
