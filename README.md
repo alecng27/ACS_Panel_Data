@@ -11,6 +11,7 @@ For this project, I utilized the 2019 ACS data to explore and compare the 2020 U
 
 https://alecng27.github.io/ACS_Panel_Data/
 
+See the [LICENSE](LICENSE) file for license rights and limitations.
 
 
 
