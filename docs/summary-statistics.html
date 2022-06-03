@@ -59,7 +59,7 @@
 <script src="libs/proj4-2.6.2/proj4.min.js"></script>
 <script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
 <link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-binding-2.0.4.1/leaflet.js"></script>
+<script src="libs/leaflet-binding-2.1.1/leaflet.js"></script>
 
 
 <style type="text/css">
@@ -189,13 +189,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="summary-statistics" class="section level2 sumstats" number="1.3">
 <h2><span class="header-section-number">1.3</span> Summary Statistics</h2>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="summary-statistics.html#cb12-1" aria-hidden="true" tabindex="-1"></a>countyGIS_stat <span class="ot">&lt;-</span> <span class="fu">st_drop_geometry</span>(countyGIS)</span>
-<span id="cb12-2"><a href="summary-statistics.html#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-3"><a href="summary-statistics.html#cb12-3" aria-hidden="true" tabindex="-1"></a>countyGIS_stat <span class="ot">&lt;-</span> countyGIS_stat <span class="sc">%&gt;%</span></span>
-<span id="cb12-4"><a href="summary-statistics.html#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(pctGOP, totalVotes, pct_white, pct_asian, pct_whiteage, pct_asianage, pct_us_born, pct_us_naturalized, pct_employment_male, pct_employment_female)</span>
-<span id="cb12-5"><a href="summary-statistics.html#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-6"><a href="summary-statistics.html#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-7"><a href="summary-statistics.html#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(countyGIS_stat, <span class="at">type =</span> <span class="st">&quot;html&quot;</span>,<span class="at">summary.stat =</span> <span class="fu">c</span>(<span class="st">&quot;mean&quot;</span>,<span class="st">&quot;sd&quot;</span>, <span class="st">&quot;min&quot;</span>, <span class="st">&quot;median&quot;</span>, <span class="st">&quot;max&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="summary-statistics.html#cb16-1" aria-hidden="true" tabindex="-1"></a>countyGIS_stat <span class="ot">&lt;-</span> <span class="fu">st_drop_geometry</span>(countyGIS)</span>
+<span id="cb16-2"><a href="summary-statistics.html#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="summary-statistics.html#cb16-3" aria-hidden="true" tabindex="-1"></a>countyGIS_stat <span class="ot">&lt;-</span> countyGIS_stat <span class="sc">%&gt;%</span></span>
+<span id="cb16-4"><a href="summary-statistics.html#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(pctGOP, totalVotes, pct_white, pct_asian, pct_whiteage, pct_asianage, pct_us_born, pct_us_naturalized, pct_employment_male, pct_employment_female)</span>
+<span id="cb16-5"><a href="summary-statistics.html#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="summary-statistics.html#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-7"><a href="summary-statistics.html#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(countyGIS_stat, <span class="at">type =</span> <span class="st">&quot;html&quot;</span>,<span class="at">summary.stat =</span> <span class="fu">c</span>(<span class="st">&quot;mean&quot;</span>,<span class="st">&quot;sd&quot;</span>, <span class="st">&quot;min&quot;</span>, <span class="st">&quot;median&quot;</span>, <span class="st">&quot;max&quot;</span>))</span></code></pre></div>
 <table style="text-align:center">
 <tr>
 <td colspan="6" style="border-bottom: 1px solid black">
@@ -270,16 +270,16 @@ totalVotes
 pct_white
 </td>
 <td>
-83.346
+82.203
 </td>
 <td>
-16.407
+16.436
 </td>
 <td>
-5.141
+4.756
 </td>
 <td>
-89.829
+88.387
 </td>
 <td>
 100.000
@@ -290,19 +290,19 @@ pct_white
 pct_asian
 </td>
 <td>
-1.309
+1.337
 </td>
 <td>
-2.552
+2.610
 </td>
 <td>
-0
+0.000
 </td>
 <td>
-0.6
+0.632
 </td>
 <td>
-43
+42.597
 </td>
 </tr>
 <tr>
@@ -310,19 +310,19 @@ pct_asian
 pct_whiteage
 </td>
 <td>
-65.790
+65.093
 </td>
 <td>
-12.891
+12.988
 </td>
 <td>
-4.402
+4.217
 </td>
 <td>
-70.204
+69.502
 </td>
 <td>
-87.613
+87.459
 </td>
 </tr>
 <tr>
@@ -330,19 +330,19 @@ pct_whiteage
 pct_asianage
 </td>
 <td>
-1.039
+1.060
 </td>
 <td>
-2.059
+2.090
 </td>
 <td>
-0
+0.000
 </td>
 <td>
-0.5
+0.510
 </td>
 <td>
-37
+36.787
 </td>
 </tr>
 <tr>
@@ -350,16 +350,16 @@ pct_asianage
 pct_us_born
 </td>
 <td>
-94.499
+94.508
 </td>
 <td>
-6.043
+5.991
 </td>
 <td>
-43.349
+43.205
 </td>
 <td>
-96.626
+96.594
 </td>
 <td>
 100.000
@@ -370,19 +370,19 @@ pct_us_born
 pct_us_naturalized
 </td>
 <td>
-1.963
+2.016
 </td>
 <td>
-2.552
+2.626
 </td>
 <td>
 0.000
 </td>
 <td>
-1.143
+1.175
 </td>
 <td>
-31.055
+31.867
 </td>
 </tr>
 <tr>
@@ -390,19 +390,19 @@ pct_us_naturalized
 pct_employment_male
 </td>
 <td>
-39.995
+40.083
 </td>
 <td>
-2.977
+3.072
 </td>
 <td>
-29.577
+28.900
 </td>
 <td>
-39.492
+39.554
 </td>
 <td>
-68.371
+67.650
 </td>
 </tr>
 <tr>
@@ -410,19 +410,19 @@ pct_employment_male
 pct_employment_female
 </td>
 <td>
-40.352
+40.410
 </td>
 <td>
-2.497
+2.621
 </td>
 <td>
-23.916
+15.385
 </td>
 <td>
-40.712
+40.777
 </td>
 <td>
-47.775
+50.255
 </td>
 </tr>
 <tr>

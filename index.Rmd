@@ -11,7 +11,7 @@ link-citations: yes
 
 Project Source Code - https://github.com/alecng27/ACS_Panel_Data
 
-See the [LICENSE](LICENSE) file for license rights and limitations.
+See the [LICENSE](https://github.com/alecng27/ACS_Panel_Data/blob/main/LICENSE) file for license rights and limitations.
 
 The American Community Survey (ACS) is a demographics survey program conducted by the U.S. Census Bureau. 
 
