@@ -4,19 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>1.2 Election data download and preparation | ACS Panel Data Project</title>
-  <meta name="description" content="1.2 Election data download and preparation | ACS Panel Data Project" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <title>1.2 Election data download and preparation | US Presidential Election Data Visualization</title>
+  <meta name="description" content="1.2 Election data download and preparation | US Presidential Election Data Visualization" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="1.2 Election data download and preparation | ACS Panel Data Project" />
+  <meta property="og:title" content="1.2 Election data download and preparation | US Presidential Election Data Visualization" />
   <meta property="og:type" content="book" />
-  
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="1.2 Election data download and preparation | ACS Panel Data Project" />
+  <meta name="twitter:title" content="1.2 Election data download and preparation | US Presidential Election Data Visualization" />
   
   
   
@@ -32,7 +31,6 @@
   
 <link rel="prev" href="gis-data-download-and-preparation.html"/>
 <link rel="next" href="summary-statistics.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -50,8 +48,9 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
 <link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
 <script src="libs/leaflet-1.3.1/leaflet.js"></script>
@@ -179,7 +178,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">ACS Panel Data Project</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">US Presidential Election Data Visualization</a>
           </h1>
         </div>
 
@@ -187,47 +186,47 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="election-data-download-and-preparation" class="section level2" number="1.2">
-<h2><span class="header-section-number">1.2</span> Election data download and preparation</h2>
+<div id="election-data-download-and-preparation" class="section level2 hasAnchor" number="1.2">
+<h2><span class="header-section-number">1.2</span> Election data download and preparation<a href="election-data-download-and-preparation.html#election-data-download-and-preparation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Now we’re going to download 2020 county-level election results from a GitHub repo. You can read more about the data <a href="https://github.com/tonmcg/US_County_Level_Election_Results_08-20">in the repo</a>.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="election-data-download-and-preparation.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="do">## 2020 Election data</span></span>
-<span id="cb15-2"><a href="election-data-download-and-preparation.html#cb15-2" aria-hidden="true" tabindex="-1"></a>dta2020 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/tonmcg/US_County_Level_Election_Results_08-20/master/2020_US_County_Level_Presidential_Results.csv&quot;</span>)</span>
-<span id="cb15-3"><a href="election-data-download-and-preparation.html#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-4"><a href="election-data-download-and-preparation.html#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Calculate percentages based on total votes for Trump and Biden (GOP and Dem) only</span></span>
-<span id="cb15-5"><a href="election-data-download-and-preparation.html#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="do">##   In some years there have been ties, so we&#39;re allowing for that</span></span>
-<span id="cb15-6"><a href="election-data-download-and-preparation.html#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="do">##   stdVotes and stdVotesLog will be used to scale color opacitiy from 0 to 1 based on total votes</span></span>
-<span id="cb15-7"><a href="election-data-download-and-preparation.html#cb15-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-8"><a href="election-data-download-and-preparation.html#cb15-8" aria-hidden="true" tabindex="-1"></a>dta2020 <span class="ot">&lt;-</span> dta2020 <span class="sc">%&gt;%</span> </span>
-<span id="cb15-9"><a href="election-data-download-and-preparation.html#cb15-9" aria-hidden="true" tabindex="-1"></a>            <span class="fu">mutate</span>(<span class="at">pctGOP =</span> votes_gop<span class="sc">/</span>(votes_gop <span class="sc">+</span> votes_dem),</span>
-<span id="cb15-10"><a href="election-data-download-and-preparation.html#cb15-10" aria-hidden="true" tabindex="-1"></a>                   <span class="at">totalVotes =</span> votes_gop <span class="sc">+</span> votes_dem,</span>
-<span id="cb15-11"><a href="election-data-download-and-preparation.html#cb15-11" aria-hidden="true" tabindex="-1"></a>                   <span class="at">winner =</span> <span class="fu">ifelse</span>(dta2020<span class="sc">$</span>votes_gop <span class="sc">&gt;</span> dta2020<span class="sc">$</span>votes_dem,<span class="st">&quot;Trump&quot;</span>,</span>
-<span id="cb15-12"><a href="election-data-download-and-preparation.html#cb15-12" aria-hidden="true" tabindex="-1"></a>                                   <span class="fu">ifelse</span>(dta2020<span class="sc">$</span>votes_gop <span class="sc">&lt;</span> dta2020<span class="sc">$</span>votes_dem,<span class="st">&quot;Biden&quot;</span>, </span>
-<span id="cb15-13"><a href="election-data-download-and-preparation.html#cb15-13" aria-hidden="true" tabindex="-1"></a>                                          <span class="st">&quot;Tie&quot;</span>)),</span>
-<span id="cb15-14"><a href="election-data-download-and-preparation.html#cb15-14" aria-hidden="true" tabindex="-1"></a>                   <span class="at">pctWinner =</span> <span class="fu">ifelse</span>(dta2020<span class="sc">$</span>votes_gop <span class="sc">&gt;</span> dta2020<span class="sc">$</span>votes_dem,pctGOP,<span class="dv">1</span><span class="sc">-</span>pctGOP),</span>
-<span id="cb15-15"><a href="election-data-download-and-preparation.html#cb15-15" aria-hidden="true" tabindex="-1"></a>                   <span class="at">FontColorWinner =</span> <span class="fu">ifelse</span>(dta2020<span class="sc">$</span>votes_gop <span class="sc">&gt;</span> dta2020<span class="sc">$</span>votes_dem,<span class="st">&quot;red&quot;</span>,</span>
-<span id="cb15-16"><a href="election-data-download-and-preparation.html#cb15-16" aria-hidden="true" tabindex="-1"></a>                                      <span class="fu">ifelse</span>(dta2020<span class="sc">$</span>votes_gop <span class="sc">&lt;</span> dta2020<span class="sc">$</span>votes_dem,<span class="st">&quot;blue&quot;</span>,</span>
-<span id="cb15-17"><a href="election-data-download-and-preparation.html#cb15-17" aria-hidden="true" tabindex="-1"></a>                                             <span class="st">&quot;purple&quot;</span>)),</span>
-<span id="cb15-18"><a href="election-data-download-and-preparation.html#cb15-18" aria-hidden="true" tabindex="-1"></a>                   <span class="at">pctGOPcategories =</span> <span class="fu">ifelse</span>(pctGOP<span class="sc">&lt;</span><span class="fl">0.48</span>,<span class="st">&quot;0-48%&quot;</span>, </span>
-<span id="cb15-19"><a href="election-data-download-and-preparation.html#cb15-19" aria-hidden="true" tabindex="-1"></a>                                             <span class="fu">ifelse</span>(pctGOP<span class="sc">&lt;</span><span class="fl">0.5</span>,<span class="st">&quot;48-50%&quot;</span>, </span>
-<span id="cb15-20"><a href="election-data-download-and-preparation.html#cb15-20" aria-hidden="true" tabindex="-1"></a>                                                    <span class="fu">ifelse</span>(pctGOP<span class="sc">&lt;</span><span class="fl">0.52</span>, <span class="st">&quot;50-52%&quot;</span>,</span>
-<span id="cb15-21"><a href="election-data-download-and-preparation.html#cb15-21" aria-hidden="true" tabindex="-1"></a>                                                           <span class="st">&quot;52-100%&quot;</span>))),</span>
-<span id="cb15-22"><a href="election-data-download-and-preparation.html#cb15-22" aria-hidden="true" tabindex="-1"></a>                   <span class="at">stdVotes =</span> (totalVotes<span class="sc">-</span><span class="fu">min</span>(totalVotes))<span class="sc">/</span>(<span class="fu">max</span>(totalVotes)<span class="sc">-</span><span class="fu">min</span>(totalVotes)),</span>
-<span id="cb15-23"><a href="election-data-download-and-preparation.html#cb15-23" aria-hidden="true" tabindex="-1"></a>                   <span class="at">stdVotesLog =</span> (<span class="fu">log</span>(totalVotes)<span class="sc">-</span><span class="fu">min</span>(<span class="fu">log</span>(totalVotes)))<span class="sc">/</span>(<span class="fu">max</span>(<span class="fu">log</span>(totalVotes))<span class="sc">-</span><span class="fu">min</span>(<span class="fu">log</span>(totalVotes)))</span>
-<span id="cb15-24"><a href="election-data-download-and-preparation.html#cb15-24" aria-hidden="true" tabindex="-1"></a>                   )</span>
-<span id="cb15-25"><a href="election-data-download-and-preparation.html#cb15-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-26"><a href="election-data-download-and-preparation.html#cb15-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-27"><a href="election-data-download-and-preparation.html#cb15-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-28"><a href="election-data-download-and-preparation.html#cb15-28" aria-hidden="true" tabindex="-1"></a>dta2020 <span class="ot">&lt;-</span> dta2020 <span class="sc">%&gt;%</span> </span>
-<span id="cb15-29"><a href="election-data-download-and-preparation.html#cb15-29" aria-hidden="true" tabindex="-1"></a>            <span class="fu">select</span>(<span class="at">FIPS =</span>  county_fips, pctGOP, totalVotes, winner, pctWinner, pctGOPcategories, FontColorWinner, stdVotes, stdVotesLog)</span>
-<span id="cb15-30"><a href="election-data-download-and-preparation.html#cb15-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-31"><a href="election-data-download-and-preparation.html#cb15-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-32"><a href="election-data-download-and-preparation.html#cb15-32" aria-hidden="true" tabindex="-1"></a><span class="do">## merge GIS data with voting data</span></span>
-<span id="cb15-33"><a href="election-data-download-and-preparation.html#cb15-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-34"><a href="election-data-download-and-preparation.html#cb15-34" aria-hidden="true" tabindex="-1"></a>countyGIS <span class="ot">&lt;-</span> <span class="fu">left_join</span>(countyGIS,dta2020,<span class="at">by=</span><span class="st">&quot;FIPS&quot;</span>)</span>
-<span id="cb15-35"><a href="election-data-download-and-preparation.html#cb15-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-36"><a href="election-data-download-and-preparation.html#cb15-36" aria-hidden="true" tabindex="-1"></a><span class="do">## For maps, drop the following: </span></span>
-<span id="cb15-37"><a href="election-data-download-and-preparation.html#cb15-37" aria-hidden="true" tabindex="-1"></a><span class="do">##   Hawaii (ST FIPS 15) (so our map can zoom in on continental 48 states)</span></span>
-<span id="cb15-38"><a href="election-data-download-and-preparation.html#cb15-38" aria-hidden="true" tabindex="-1"></a>countyGIS_map <span class="ot">&lt;-</span> countyGIS <span class="sc">%&gt;%</span> <span class="fu">filter</span>(stFIPS <span class="sc">!=</span> <span class="st">&quot;15&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="election-data-download-and-preparation.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="do">## 2020 Election data</span></span>
+<span id="cb11-2"><a href="election-data-download-and-preparation.html#cb11-2" aria-hidden="true" tabindex="-1"></a>dta2020 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/tonmcg/US_County_Level_Election_Results_08-20/master/2020_US_County_Level_Presidential_Results.csv&quot;</span>)</span>
+<span id="cb11-3"><a href="election-data-download-and-preparation.html#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="election-data-download-and-preparation.html#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Calculate percentages based on total votes for Trump and Biden (GOP and Dem) only</span></span>
+<span id="cb11-5"><a href="election-data-download-and-preparation.html#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="do">##   In some years there have been ties, so we&#39;re allowing for that</span></span>
+<span id="cb11-6"><a href="election-data-download-and-preparation.html#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="do">##   stdVotes and stdVotesLog will be used to scale color opacitiy from 0 to 1 based on total votes</span></span>
+<span id="cb11-7"><a href="election-data-download-and-preparation.html#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-8"><a href="election-data-download-and-preparation.html#cb11-8" aria-hidden="true" tabindex="-1"></a>dta2020 <span class="ot">&lt;-</span> dta2020 <span class="sc">%&gt;%</span> </span>
+<span id="cb11-9"><a href="election-data-download-and-preparation.html#cb11-9" aria-hidden="true" tabindex="-1"></a>            <span class="fu">mutate</span>(<span class="at">pctGOP =</span> votes_gop<span class="sc">/</span>(votes_gop <span class="sc">+</span> votes_dem),</span>
+<span id="cb11-10"><a href="election-data-download-and-preparation.html#cb11-10" aria-hidden="true" tabindex="-1"></a>                   <span class="at">totalVotes =</span> votes_gop <span class="sc">+</span> votes_dem,</span>
+<span id="cb11-11"><a href="election-data-download-and-preparation.html#cb11-11" aria-hidden="true" tabindex="-1"></a>                   <span class="at">winner =</span> <span class="fu">ifelse</span>(dta2020<span class="sc">$</span>votes_gop <span class="sc">&gt;</span> dta2020<span class="sc">$</span>votes_dem,<span class="st">&quot;Trump&quot;</span>,</span>
+<span id="cb11-12"><a href="election-data-download-and-preparation.html#cb11-12" aria-hidden="true" tabindex="-1"></a>                                   <span class="fu">ifelse</span>(dta2020<span class="sc">$</span>votes_gop <span class="sc">&lt;</span> dta2020<span class="sc">$</span>votes_dem,<span class="st">&quot;Biden&quot;</span>, </span>
+<span id="cb11-13"><a href="election-data-download-and-preparation.html#cb11-13" aria-hidden="true" tabindex="-1"></a>                                          <span class="st">&quot;Tie&quot;</span>)),</span>
+<span id="cb11-14"><a href="election-data-download-and-preparation.html#cb11-14" aria-hidden="true" tabindex="-1"></a>                   <span class="at">pctWinner =</span> <span class="fu">ifelse</span>(dta2020<span class="sc">$</span>votes_gop <span class="sc">&gt;</span> dta2020<span class="sc">$</span>votes_dem,pctGOP,<span class="dv">1</span><span class="sc">-</span>pctGOP),</span>
+<span id="cb11-15"><a href="election-data-download-and-preparation.html#cb11-15" aria-hidden="true" tabindex="-1"></a>                   <span class="at">FontColorWinner =</span> <span class="fu">ifelse</span>(dta2020<span class="sc">$</span>votes_gop <span class="sc">&gt;</span> dta2020<span class="sc">$</span>votes_dem,<span class="st">&quot;red&quot;</span>,</span>
+<span id="cb11-16"><a href="election-data-download-and-preparation.html#cb11-16" aria-hidden="true" tabindex="-1"></a>                                      <span class="fu">ifelse</span>(dta2020<span class="sc">$</span>votes_gop <span class="sc">&lt;</span> dta2020<span class="sc">$</span>votes_dem,<span class="st">&quot;blue&quot;</span>,</span>
+<span id="cb11-17"><a href="election-data-download-and-preparation.html#cb11-17" aria-hidden="true" tabindex="-1"></a>                                             <span class="st">&quot;purple&quot;</span>)),</span>
+<span id="cb11-18"><a href="election-data-download-and-preparation.html#cb11-18" aria-hidden="true" tabindex="-1"></a>                   <span class="at">pctGOPcategories =</span> <span class="fu">ifelse</span>(pctGOP<span class="sc">&lt;</span><span class="fl">0.48</span>,<span class="st">&quot;0-48%&quot;</span>, </span>
+<span id="cb11-19"><a href="election-data-download-and-preparation.html#cb11-19" aria-hidden="true" tabindex="-1"></a>                                             <span class="fu">ifelse</span>(pctGOP<span class="sc">&lt;</span><span class="fl">0.5</span>,<span class="st">&quot;48-50%&quot;</span>, </span>
+<span id="cb11-20"><a href="election-data-download-and-preparation.html#cb11-20" aria-hidden="true" tabindex="-1"></a>                                                    <span class="fu">ifelse</span>(pctGOP<span class="sc">&lt;</span><span class="fl">0.52</span>, <span class="st">&quot;50-52%&quot;</span>,</span>
+<span id="cb11-21"><a href="election-data-download-and-preparation.html#cb11-21" aria-hidden="true" tabindex="-1"></a>                                                           <span class="st">&quot;52-100%&quot;</span>))),</span>
+<span id="cb11-22"><a href="election-data-download-and-preparation.html#cb11-22" aria-hidden="true" tabindex="-1"></a>                   <span class="at">stdVotes =</span> (totalVotes<span class="sc">-</span><span class="fu">min</span>(totalVotes))<span class="sc">/</span>(<span class="fu">max</span>(totalVotes)<span class="sc">-</span><span class="fu">min</span>(totalVotes)),</span>
+<span id="cb11-23"><a href="election-data-download-and-preparation.html#cb11-23" aria-hidden="true" tabindex="-1"></a>                   <span class="at">stdVotesLog =</span> (<span class="fu">log</span>(totalVotes)<span class="sc">-</span><span class="fu">min</span>(<span class="fu">log</span>(totalVotes)))<span class="sc">/</span>(<span class="fu">max</span>(<span class="fu">log</span>(totalVotes))<span class="sc">-</span><span class="fu">min</span>(<span class="fu">log</span>(totalVotes)))</span>
+<span id="cb11-24"><a href="election-data-download-and-preparation.html#cb11-24" aria-hidden="true" tabindex="-1"></a>                   )</span>
+<span id="cb11-25"><a href="election-data-download-and-preparation.html#cb11-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-26"><a href="election-data-download-and-preparation.html#cb11-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-27"><a href="election-data-download-and-preparation.html#cb11-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-28"><a href="election-data-download-and-preparation.html#cb11-28" aria-hidden="true" tabindex="-1"></a>dta2020 <span class="ot">&lt;-</span> dta2020 <span class="sc">%&gt;%</span> </span>
+<span id="cb11-29"><a href="election-data-download-and-preparation.html#cb11-29" aria-hidden="true" tabindex="-1"></a>            <span class="fu">select</span>(<span class="at">FIPS =</span>  county_fips, pctGOP, totalVotes, winner, pctWinner, pctGOPcategories, FontColorWinner, stdVotes, stdVotesLog)</span>
+<span id="cb11-30"><a href="election-data-download-and-preparation.html#cb11-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-31"><a href="election-data-download-and-preparation.html#cb11-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-32"><a href="election-data-download-and-preparation.html#cb11-32" aria-hidden="true" tabindex="-1"></a><span class="do">## merge GIS data with voting data</span></span>
+<span id="cb11-33"><a href="election-data-download-and-preparation.html#cb11-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-34"><a href="election-data-download-and-preparation.html#cb11-34" aria-hidden="true" tabindex="-1"></a>countyGIS <span class="ot">&lt;-</span> <span class="fu">left_join</span>(countyGIS,dta2020,<span class="at">by=</span><span class="st">&quot;FIPS&quot;</span>)</span>
+<span id="cb11-35"><a href="election-data-download-and-preparation.html#cb11-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-36"><a href="election-data-download-and-preparation.html#cb11-36" aria-hidden="true" tabindex="-1"></a><span class="do">## For maps, drop the following: </span></span>
+<span id="cb11-37"><a href="election-data-download-and-preparation.html#cb11-37" aria-hidden="true" tabindex="-1"></a><span class="do">##   Hawaii (ST FIPS 15) (so our map can zoom in on continental 48 states)</span></span>
+<span id="cb11-38"><a href="election-data-download-and-preparation.html#cb11-38" aria-hidden="true" tabindex="-1"></a>countyGIS_map <span class="ot">&lt;-</span> countyGIS <span class="sc">%&gt;%</span> <span class="fu">filter</span>(stFIPS <span class="sc">!=</span> <span class="st">&quot;15&quot;</span>)</span></code></pre></div>
 <style>
 .sumstats td {
   text-align: right;

@@ -4,19 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>1.3 Summary Statistics | ACS Panel Data Project</title>
-  <meta name="description" content="1.3 Summary Statistics | ACS Panel Data Project" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <title>1.3 Summary Statistics | US Presidential Election Data Visualization</title>
+  <meta name="description" content="1.3 Summary Statistics | US Presidential Election Data Visualization" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="1.3 Summary Statistics | ACS Panel Data Project" />
+  <meta property="og:title" content="1.3 Summary Statistics | US Presidential Election Data Visualization" />
   <meta property="og:type" content="book" />
-  
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="1.3 Summary Statistics | ACS Panel Data Project" />
+  <meta name="twitter:title" content="1.3 Summary Statistics | US Presidential Election Data Visualization" />
   
   
   
@@ -32,7 +31,6 @@
   
 <link rel="prev" href="election-data-download-and-preparation.html"/>
 <link rel="next" href="election-map.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -50,8 +48,9 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
 <link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
 <script src="libs/leaflet-1.3.1/leaflet.js"></script>
@@ -179,7 +178,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">ACS Panel Data Project</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">US Presidential Election Data Visualization</a>
           </h1>
         </div>
 
@@ -187,15 +186,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="summary-statistics" class="section level2 sumstats" number="1.3">
-<h2><span class="header-section-number">1.3</span> Summary Statistics</h2>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="summary-statistics.html#cb16-1" aria-hidden="true" tabindex="-1"></a>countyGIS_stat <span class="ot">&lt;-</span> <span class="fu">st_drop_geometry</span>(countyGIS)</span>
-<span id="cb16-2"><a href="summary-statistics.html#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-3"><a href="summary-statistics.html#cb16-3" aria-hidden="true" tabindex="-1"></a>countyGIS_stat <span class="ot">&lt;-</span> countyGIS_stat <span class="sc">%&gt;%</span></span>
-<span id="cb16-4"><a href="summary-statistics.html#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(pctGOP, totalVotes, pct_white, pct_asian, pct_whiteage, pct_asianage, pct_us_born, pct_us_naturalized, pct_employment_male, pct_employment_female)</span>
-<span id="cb16-5"><a href="summary-statistics.html#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-6"><a href="summary-statistics.html#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-7"><a href="summary-statistics.html#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(countyGIS_stat, <span class="at">type =</span> <span class="st">&quot;html&quot;</span>,<span class="at">summary.stat =</span> <span class="fu">c</span>(<span class="st">&quot;mean&quot;</span>,<span class="st">&quot;sd&quot;</span>, <span class="st">&quot;min&quot;</span>, <span class="st">&quot;median&quot;</span>, <span class="st">&quot;max&quot;</span>))</span></code></pre></div>
+<div id="summary-statistics" class="section level2 sumstats hasAnchor" number="1.3">
+<h2><span class="header-section-number">1.3</span> Summary Statistics<a href="summary-statistics.html#summary-statistics" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="summary-statistics.html#cb12-1" aria-hidden="true" tabindex="-1"></a>countyGIS_stat <span class="ot">&lt;-</span> <span class="fu">st_drop_geometry</span>(countyGIS)</span>
+<span id="cb12-2"><a href="summary-statistics.html#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="summary-statistics.html#cb12-3" aria-hidden="true" tabindex="-1"></a>countyGIS_stat <span class="ot">&lt;-</span> countyGIS_stat <span class="sc">%&gt;%</span></span>
+<span id="cb12-4"><a href="summary-statistics.html#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(pctGOP, totalVotes, pct_white, pct_asian, pct_whiteage, pct_asianage, pct_us_born, pct_us_naturalized, pct_employment_male, pct_employment_female)</span>
+<span id="cb12-5"><a href="summary-statistics.html#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="summary-statistics.html#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="summary-statistics.html#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(countyGIS_stat, <span class="at">type =</span> <span class="st">&quot;html&quot;</span>,<span class="at">summary.stat =</span> <span class="fu">c</span>(<span class="st">&quot;mean&quot;</span>,<span class="st">&quot;sd&quot;</span>, <span class="st">&quot;min&quot;</span>, <span class="st">&quot;median&quot;</span>, <span class="st">&quot;max&quot;</span>))</span></code></pre></div>
 <table style="text-align:center">
 <tr>
 <td colspan="6" style="border-bottom: 1px solid black">

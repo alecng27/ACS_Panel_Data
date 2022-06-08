@@ -4,19 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>1.1 GIS data download and preparation | ACS Panel Data Project</title>
-  <meta name="description" content="1.1 GIS data download and preparation | ACS Panel Data Project" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <title>1.1 GIS data download and preparation | US Presidential Election Data Visualization</title>
+  <meta name="description" content="1.1 GIS data download and preparation | US Presidential Election Data Visualization" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="1.1 GIS data download and preparation | ACS Panel Data Project" />
+  <meta property="og:title" content="1.1 GIS data download and preparation | US Presidential Election Data Visualization" />
   <meta property="og:type" content="book" />
-  
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="1.1 GIS data download and preparation | ACS Panel Data Project" />
+  <meta name="twitter:title" content="1.1 GIS data download and preparation | US Presidential Election Data Visualization" />
   
   
   
@@ -32,7 +31,6 @@
   
 <link rel="prev" href="data.html"/>
 <link rel="next" href="election-data-download-and-preparation.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -50,8 +48,9 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
 <link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
 <script src="libs/leaflet-1.3.1/leaflet.js"></script>
@@ -179,7 +178,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">ACS Panel Data Project</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">US Presidential Election Data Visualization</a>
           </h1>
         </div>
 
@@ -187,8 +186,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="gis-data-download-and-preparation" class="section level2" number="1.1">
-<h2><span class="header-section-number">1.1</span> GIS data download and preparation</h2>
+<div id="gis-data-download-and-preparation" class="section level2 hasAnchor" number="1.1">
+<h2><span class="header-section-number">1.1</span> GIS data download and preparation<a href="gis-data-download-and-preparation.html#gis-data-download-and-preparation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="gis-data-download-and-preparation.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="gis-data-download-and-preparation.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(leaflet)</span>
 <span id="cb1-3"><a href="gis-data-download-and-preparation.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rmapshaper)</span>
@@ -211,546 +210,167 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-7"><a href="gis-data-download-and-preparation.html#cb2-7" aria-hidden="true" tabindex="-1"></a>countyGIS <span class="ot">&lt;-</span> <span class="fu">get_acs</span>(<span class="at">geography =</span> <span class="st">&quot;county&quot;</span>,</span>
 <span id="cb2-8"><a href="gis-data-download-and-preparation.html#cb2-8" aria-hidden="true" tabindex="-1"></a>              <span class="at">variables =</span> <span class="st">&quot;B01001_001&quot;</span>,</span>
 <span id="cb2-9"><a href="gis-data-download-and-preparation.html#cb2-9" aria-hidden="true" tabindex="-1"></a>              <span class="at">geometry =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb2-10"><a href="gis-data-download-and-preparation.html#cb2-10" aria-hidden="true" tabindex="-1"></a>              <span class="at">keep_geo_vars =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<pre><code>## 
-  |                                                                            
-  |                                                                      |   0%
-  |                                                                            
-  |                                                                      |   1%
-  |                                                                            
-  |=                                                                     |   1%
-  |                                                                            
-  |=                                                                     |   2%
-  |                                                                            
-  |==                                                                    |   2%
-  |                                                                            
-  |==                                                                    |   3%
-  |                                                                            
-  |===                                                                   |   4%
-  |                                                                            
-  |======                                                                |   9%
-  |                                                                            
-  |=======                                                               |   9%
-  |                                                                            
-  |=======                                                               |  10%
-  |                                                                            
-  |=======                                                               |  11%
-  |                                                                            
-  |========                                                              |  11%
-  |                                                                            
-  |========                                                              |  12%
-  |                                                                            
-  |===========                                                           |  15%
-  |                                                                            
-  |===========                                                           |  16%
-  |                                                                            
-  |============                                                          |  16%
-  |                                                                            
-  |============                                                          |  17%
-  |                                                                            
-  |============                                                          |  18%
-  |                                                                            
-  |=============                                                         |  18%
-  |                                                                            
-  |=============                                                         |  19%
-  |                                                                            
-  |==============                                                        |  21%
-  |                                                                            
-  |===============                                                       |  21%
-  |                                                                            
-  |===============                                                       |  22%
-  |                                                                            
-  |================                                                      |  23%
-  |                                                                            
-  |==================                                                    |  26%
-  |                                                                            
-  |===================                                                   |  27%
-  |                                                                            
-  |====================                                                  |  28%
-  |                                                                            
-  |====================                                                  |  29%
-  |                                                                            
-  |=====================                                                 |  29%
-  |                                                                            
-  |======================                                                |  31%
-  |                                                                            
-  |=======================                                               |  33%
-  |                                                                            
-  |========================                                              |  34%
-  |                                                                            
-  |=========================                                             |  35%
-  |                                                                            
-  |=========================                                             |  36%
-  |                                                                            
-  |==========================                                            |  37%
-  |                                                                            
-  |==========================                                            |  38%
-  |                                                                            
-  |===========================                                           |  38%
-  |                                                                            
-  |===========================                                           |  39%
-  |                                                                            
-  |============================                                          |  39%
-  |                                                                            
-  |============================                                          |  40%
-  |                                                                            
-  |=============================                                         |  41%
-  |                                                                            
-  |================================                                      |  45%
-  |                                                                            
-  |================================                                      |  46%
-  |                                                                            
-  |=================================                                     |  47%
-  |                                                                            
-  |=================================                                     |  48%
-  |                                                                            
-  |==================================                                    |  48%
-  |                                                                            
-  |==================================                                    |  49%
-  |                                                                            
-  |===================================                                   |  49%
-  |                                                                            
-  |===================================                                   |  50%
-  |                                                                            
-  |===================================                                   |  51%
-  |                                                                            
-  |====================================                                  |  52%
-  |                                                                            
-  |=====================================                                 |  54%
-  |                                                                            
-  |======================================                                |  54%
-  |                                                                            
-  |======================================                                |  55%
-  |                                                                            
-  |=======================================                               |  55%
-  |                                                                            
-  |=======================================                               |  56%
-  |                                                                            
-  |========================================                              |  57%
-  |                                                                            
-  |========================================                              |  58%
-  |                                                                            
-  |=========================================                             |  58%
-  |                                                                            
-  |=========================================                             |  59%
-  |                                                                            
-  |==========================================                            |  59%
-  |                                                                            
-  |==========================================                            |  60%
-  |                                                                            
-  |===========================================                           |  61%
-  |                                                                            
-  |===========================================                           |  62%
-  |                                                                            
-  |============================================                          |  62%
-  |                                                                            
-  |============================================                          |  63%
-  |                                                                            
-  |=============================================                         |  64%
-  |                                                                            
-  |=============================================                         |  65%
-  |                                                                            
-  |================================================                      |  69%
-  |                                                                            
-  |=================================================                     |  69%
-  |                                                                            
-  |=================================================                     |  70%
-  |                                                                            
-  |=================================================                     |  71%
-  |                                                                            
-  |==================================================                    |  71%
-  |                                                                            
-  |==================================================                    |  72%
-  |                                                                            
-  |===================================================                   |  72%
-  |                                                                            
-  |===================================================                   |  73%
-  |                                                                            
-  |====================================================                  |  74%
-  |                                                                            
-  |====================================================                  |  75%
-  |                                                                            
-  |=====================================================                 |  75%
-  |                                                                            
-  |=====================================================                 |  76%
-  |                                                                            
-  |======================================================                |  77%
-  |                                                                            
-  |======================================================                |  78%
-  |                                                                            
-  |=======================================================               |  78%
-  |                                                                            
-  |=======================================================               |  79%
-  |                                                                            
-  |========================================================              |  80%
-  |                                                                            
-  |=========================================================             |  81%
-  |                                                                            
-  |============================================================          |  86%
-  |                                                                            
-  |=============================================================         |  87%
-  |                                                                            
-  |=============================================================         |  88%
-  |                                                                            
-  |==============================================================        |  88%
-  |                                                                            
-  |==============================================================        |  89%
-  |                                                                            
-  |===============================================================       |  90%
-  |                                                                            
-  |===============================================================       |  91%
-  |                                                                            
-  |================================================================      |  91%
-  |                                                                            
-  |================================================================      |  92%
-  |                                                                            
-  |=================================================================     |  92%
-  |                                                                            
-  |==================================================================    |  94%
-  |                                                                            
-  |==================================================================    |  95%
-  |                                                                            
-  |===================================================================   |  95%
-  |                                                                            
-  |===================================================================   |  96%
-  |                                                                            
-  |====================================================================  |  96%
-  |                                                                            
-  |====================================================================  |  97%
-  |                                                                            
-  |====================================================================  |  98%
-  |                                                                            
-  |===================================================================== |  98%
-  |                                                                            
-  |===================================================================== |  99%
-  |                                                                            
-  |======================================================================|  99%
-  |                                                                            
-  |======================================================================| 100%</code></pre>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="gis-data-download-and-preparation.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># State data (for displaying state borders on map)</span></span>
-<span id="cb4-2"><a href="gis-data-download-and-preparation.html#cb4-2" aria-hidden="true" tabindex="-1"></a>stateGIS <span class="ot">&lt;-</span> <span class="fu">get_acs</span>(<span class="at">geography =</span> <span class="st">&quot;state&quot;</span>,</span>
-<span id="cb4-3"><a href="gis-data-download-and-preparation.html#cb4-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">variables =</span> <span class="st">&quot;B01001_001&quot;</span>,</span>
-<span id="cb4-4"><a href="gis-data-download-and-preparation.html#cb4-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">geometry =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb4-5"><a href="gis-data-download-and-preparation.html#cb4-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">keep_geo_vars =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
-<pre><code>## 
-  |                                                                            
-  |                                                                      |   0%
-  |                                                                            
-  |=                                                                     |   1%
-  |                                                                            
-  |=                                                                     |   2%
-  |                                                                            
-  |==                                                                    |   2%
-  |                                                                            
-  |==                                                                    |   3%
-  |                                                                            
-  |===                                                                   |   4%
-  |                                                                            
-  |===                                                                   |   5%
-  |                                                                            
-  |====                                                                  |   5%
-  |                                                                            
-  |====                                                                  |   6%
-  |                                                                            
-  |=====                                                                 |   7%
-  |                                                                            
-  |=====                                                                 |   8%
-  |                                                                            
-  |======                                                                |   8%
-  |                                                                            
-  |======                                                                |   9%
-  |                                                                            
-  |=======                                                               |  10%
-  |                                                                            
-  |========                                                              |  11%
-  |                                                                            
-  |========                                                              |  12%
-  |                                                                            
-  |=========                                                             |  13%
-  |                                                                            
-  |=========                                                             |  14%
-  |                                                                            
-  |==========                                                            |  14%
-  |                                                                            
-  |==========                                                            |  15%
-  |                                                                            
-  |===========                                                           |  16%
-  |                                                                            
-  |============                                                          |  16%
-  |                                                                            
-  |============                                                          |  17%
-  |                                                                            
-  |============                                                          |  18%
-  |                                                                            
-  |=============                                                         |  18%
-  |                                                                            
-  |=============                                                         |  19%
-  |                                                                            
-  |==============                                                        |  19%
-  |                                                                            
-  |==============                                                        |  20%
-  |                                                                            
-  |==================                                                    |  26%
-  |                                                                            
-  |================================                                      |  46%
-  |                                                                            
-  |=================================                                     |  46%
-  |                                                                            
-  |=================================                                     |  47%
-  |                                                                            
-  |==================================                                    |  48%
-  |                                                                            
-  |==================================                                    |  49%
-  |                                                                            
-  |===================================                                   |  50%
-  |                                                                            
-  |===================================                                   |  51%
-  |                                                                            
-  |====================================                                  |  51%
-  |                                                                            
-  |====================================                                  |  52%
-  |                                                                            
-  |=====================================                                 |  52%
-  |                                                                            
-  |=====================================                                 |  53%
-  |                                                                            
-  |======================================                                |  54%
-  |                                                                            
-  |=======================================                               |  56%
-  |                                                                            
-  |========================================                              |  57%
-  |                                                                            
-  |========================================                              |  58%
-  |                                                                            
-  |=========================================                             |  58%
-  |                                                                            
-  |=========================================                             |  59%
-  |                                                                            
-  |==============================================                        |  66%
-  |                                                                            
-  |===============================================                       |  67%
-  |                                                                            
-  |================================================                      |  68%
-  |                                                                            
-  |================================================                      |  69%
-  |                                                                            
-  |=================================================                     |  70%
-  |                                                                            
-  |=================================================                     |  71%
-  |                                                                            
-  |==================================================                    |  71%
-  |                                                                            
-  |==================================================                    |  72%
-  |                                                                            
-  |====================================================                  |  74%
-  |                                                                            
-  |====================================================                  |  75%
-  |                                                                            
-  |=====================================================                 |  75%
-  |                                                                            
-  |=====================================================                 |  76%
-  |                                                                            
-  |======================================================                |  77%
-  |                                                                            
-  |======================================================                |  78%
-  |                                                                            
-  |=======================================================               |  78%
-  |                                                                            
-  |=======================================================               |  79%
-  |                                                                            
-  |========================================================              |  79%
-  |                                                                            
-  |========================================================              |  80%
-  |                                                                            
-  |=========================================================             |  81%
-  |                                                                            
-  |=========================================================             |  82%
-  |                                                                            
-  |==========================================================            |  83%
-  |                                                                            
-  |===========================================================           |  84%
-  |                                                                            
-  |===========================================================           |  85%
-  |                                                                            
-  |============================================================          |  85%
-  |                                                                            
-  |============================================================          |  86%
-  |                                                                            
-  |=============================================================         |  87%
-  |                                                                            
-  |=============================================================         |  88%
-  |                                                                            
-  |==============================================================        |  88%
-  |                                                                            
-  |==============================================================        |  89%
-  |                                                                            
-  |===============================================================       |  90%
-  |                                                                            
-  |================================================================      |  91%
-  |                                                                            
-  |================================================================      |  92%
-  |                                                                            
-  |=================================================================     |  92%
-  |                                                                            
-  |=================================================================     |  93%
-  |                                                                            
-  |====================================================================  |  98%
-  |                                                                            
-  |===================================================================== |  98%
-  |                                                                            
-  |======================================================================| 100%</code></pre>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="gis-data-download-and-preparation.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Simplify GIS data to make file sizes smaller. This essentially removes some details along coastlines and very-not-straight borders. </span></span>
-<span id="cb6-2"><a href="gis-data-download-and-preparation.html#cb6-2" aria-hidden="true" tabindex="-1"></a>stateGIS <span class="ot">&lt;-</span> <span class="fu">ms_simplify</span>(stateGIS, <span class="at">keep =</span> <span class="fl">0.01</span>)</span>
-<span id="cb6-3"><a href="gis-data-download-and-preparation.html#cb6-3" aria-hidden="true" tabindex="-1"></a>countyGIS <span class="ot">&lt;-</span> <span class="fu">ms_simplify</span>(countyGIS, <span class="at">keep =</span> <span class="fl">0.01</span>)</span>
-<span id="cb6-4"><a href="gis-data-download-and-preparation.html#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-5"><a href="gis-data-download-and-preparation.html#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="gis-data-download-and-preparation.html#cb6-6" aria-hidden="true" tabindex="-1"></a>countyGIS <span class="ot">&lt;-</span> countyGIS <span class="sc">%&gt;%</span> </span>
-<span id="cb6-7"><a href="gis-data-download-and-preparation.html#cb6-7" aria-hidden="true" tabindex="-1"></a>                <span class="fu">select</span>(<span class="at">FIPS =</span> GEOID, </span>
-<span id="cb6-8"><a href="gis-data-download-and-preparation.html#cb6-8" aria-hidden="true" tabindex="-1"></a>                       <span class="at">stFIPS =</span> STATEFP, </span>
-<span id="cb6-9"><a href="gis-data-download-and-preparation.html#cb6-9" aria-hidden="true" tabindex="-1"></a>                       <span class="at">coFIPS =</span> COUNTYFP, </span>
-<span id="cb6-10"><a href="gis-data-download-and-preparation.html#cb6-10" aria-hidden="true" tabindex="-1"></a>                       <span class="at">coNAME =</span> NAME.x, </span>
-<span id="cb6-11"><a href="gis-data-download-and-preparation.html#cb6-11" aria-hidden="true" tabindex="-1"></a>                       <span class="at">pop =</span> estimate, </span>
-<span id="cb6-12"><a href="gis-data-download-and-preparation.html#cb6-12" aria-hidden="true" tabindex="-1"></a>                       geometry)</span>
-<span id="cb6-13"><a href="gis-data-download-and-preparation.html#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-14"><a href="gis-data-download-and-preparation.html#cb6-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-15"><a href="gis-data-download-and-preparation.html#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="do">## For maps, drop the following: </span></span>
-<span id="cb6-16"><a href="gis-data-download-and-preparation.html#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="do">##   Puerto Rico (ST FIPS 72) (no election data)</span></span>
-<span id="cb6-17"><a href="gis-data-download-and-preparation.html#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="do">##   Alaska (ST FIPS 02) (voting data isn&#39;t reported by county...we could also map the legislative districts, but we&#39;re not going to since we&#39;d rather have smaller maps without those extra details)</span></span>
-<span id="cb6-18"><a href="gis-data-download-and-preparation.html#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="do">##   Hawaii (ST FIPS 15) (so our map can zoom in on continental 48 states)</span></span>
-<span id="cb6-19"><a href="gis-data-download-and-preparation.html#cb6-19" aria-hidden="true" tabindex="-1"></a>countyGIS <span class="ot">&lt;-</span> countyGIS <span class="sc">%&gt;%</span> <span class="fu">filter</span>(stFIPS <span class="sc">!=</span> <span class="st">&quot;72&quot;</span> <span class="sc">&amp;</span> stFIPS <span class="sc">!=</span> <span class="st">&quot;02&quot;</span>)</span>
-<span id="cb6-20"><a href="gis-data-download-and-preparation.html#cb6-20" aria-hidden="true" tabindex="-1"></a>stateGIS <span class="ot">&lt;-</span> stateGIS <span class="sc">%&gt;%</span> <span class="fu">filter</span>(GEOID <span class="sc">!=</span> <span class="st">&quot;72&quot;</span> <span class="sc">&amp;</span> GEOID <span class="sc">!=</span> <span class="st">&quot;02&quot;</span> <span class="sc">&amp;</span> GEOID <span class="sc">!=</span> <span class="st">&quot;15&quot;</span>)</span>
-<span id="cb6-21"><a href="gis-data-download-and-preparation.html#cb6-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-22"><a href="gis-data-download-and-preparation.html#cb6-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-23"><a href="gis-data-download-and-preparation.html#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="do">## join 2-character state abbreviation and create name = county, ST for labeling maps</span></span>
-<span id="cb6-24"><a href="gis-data-download-and-preparation.html#cb6-24" aria-hidden="true" tabindex="-1"></a>fipsToSTcode <span class="ot">&lt;-</span> fips_codes <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="at">stFIPS =</span> state_code, <span class="at">stNAME =</span> state) <span class="sc">%&gt;%</span> <span class="fu">unique</span>()</span>
-<span id="cb6-25"><a href="gis-data-download-and-preparation.html#cb6-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-26"><a href="gis-data-download-and-preparation.html#cb6-26" aria-hidden="true" tabindex="-1"></a>countyGIS <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(countyGIS,fipsToSTcode,<span class="at">by=</span><span class="st">&quot;stFIPS&quot;</span>)</span>
-<span id="cb6-27"><a href="gis-data-download-and-preparation.html#cb6-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-28"><a href="gis-data-download-and-preparation.html#cb6-28" aria-hidden="true" tabindex="-1"></a>countyGIS <span class="ot">&lt;-</span> countyGIS <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">name =</span> <span class="fu">paste0</span>(coNAME,<span class="st">&quot;, &quot;</span>, stNAME))</span>
-<span id="cb6-29"><a href="gis-data-download-and-preparation.html#cb6-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-30"><a href="gis-data-download-and-preparation.html#cb6-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-31"><a href="gis-data-download-and-preparation.html#cb6-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-32"><a href="gis-data-download-and-preparation.html#cb6-32" aria-hidden="true" tabindex="-1"></a><span class="do">## </span><span class="al">NOTE</span><span class="do">: If you don&#39;t use keep_geo_vars = TRUE, you don&#39;t get separate STATEFP and COUNTYFP, but you can use mutate() and create stFIPS = substr(GEOID,1,2) and coFIPS = substr(GEOID,3,5)</span></span></code></pre></div>
+<span id="cb2-10"><a href="gis-data-download-and-preparation.html#cb2-10" aria-hidden="true" tabindex="-1"></a>              <span class="at">keep_geo_vars =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-11"><a href="gis-data-download-and-preparation.html#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="gis-data-download-and-preparation.html#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co"># State data (for displaying state borders on map)</span></span>
+<span id="cb2-13"><a href="gis-data-download-and-preparation.html#cb2-13" aria-hidden="true" tabindex="-1"></a>stateGIS <span class="ot">&lt;-</span> <span class="fu">get_acs</span>(<span class="at">geography =</span> <span class="st">&quot;state&quot;</span>,</span>
+<span id="cb2-14"><a href="gis-data-download-and-preparation.html#cb2-14" aria-hidden="true" tabindex="-1"></a>              <span class="at">variables =</span> <span class="st">&quot;B01001_001&quot;</span>,</span>
+<span id="cb2-15"><a href="gis-data-download-and-preparation.html#cb2-15" aria-hidden="true" tabindex="-1"></a>              <span class="at">geometry =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb2-16"><a href="gis-data-download-and-preparation.html#cb2-16" aria-hidden="true" tabindex="-1"></a>              <span class="at">keep_geo_vars =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb2-17"><a href="gis-data-download-and-preparation.html#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="gis-data-download-and-preparation.html#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="gis-data-download-and-preparation.html#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="do">## Simplify GIS data to make file sizes smaller. This essentially removes some details along coastlines and very-not-straight borders. </span></span>
+<span id="cb2-20"><a href="gis-data-download-and-preparation.html#cb2-20" aria-hidden="true" tabindex="-1"></a>stateGIS <span class="ot">&lt;-</span> <span class="fu">ms_simplify</span>(stateGIS, <span class="at">keep =</span> <span class="fl">0.01</span>)</span>
+<span id="cb2-21"><a href="gis-data-download-and-preparation.html#cb2-21" aria-hidden="true" tabindex="-1"></a>countyGIS <span class="ot">&lt;-</span> <span class="fu">ms_simplify</span>(countyGIS, <span class="at">keep =</span> <span class="fl">0.01</span>)</span>
+<span id="cb2-22"><a href="gis-data-download-and-preparation.html#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-23"><a href="gis-data-download-and-preparation.html#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-24"><a href="gis-data-download-and-preparation.html#cb2-24" aria-hidden="true" tabindex="-1"></a>countyGIS <span class="ot">&lt;-</span> countyGIS <span class="sc">%&gt;%</span> </span>
+<span id="cb2-25"><a href="gis-data-download-and-preparation.html#cb2-25" aria-hidden="true" tabindex="-1"></a>                <span class="fu">select</span>(<span class="at">FIPS =</span> GEOID, </span>
+<span id="cb2-26"><a href="gis-data-download-and-preparation.html#cb2-26" aria-hidden="true" tabindex="-1"></a>                       <span class="at">stFIPS =</span> STATEFP, </span>
+<span id="cb2-27"><a href="gis-data-download-and-preparation.html#cb2-27" aria-hidden="true" tabindex="-1"></a>                       <span class="at">coFIPS =</span> COUNTYFP, </span>
+<span id="cb2-28"><a href="gis-data-download-and-preparation.html#cb2-28" aria-hidden="true" tabindex="-1"></a>                       <span class="at">coNAME =</span> NAME.x, </span>
+<span id="cb2-29"><a href="gis-data-download-and-preparation.html#cb2-29" aria-hidden="true" tabindex="-1"></a>                       <span class="at">pop =</span> estimate, </span>
+<span id="cb2-30"><a href="gis-data-download-and-preparation.html#cb2-30" aria-hidden="true" tabindex="-1"></a>                       geometry)</span>
+<span id="cb2-31"><a href="gis-data-download-and-preparation.html#cb2-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-32"><a href="gis-data-download-and-preparation.html#cb2-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-33"><a href="gis-data-download-and-preparation.html#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="do">## For maps, drop the following: </span></span>
+<span id="cb2-34"><a href="gis-data-download-and-preparation.html#cb2-34" aria-hidden="true" tabindex="-1"></a><span class="do">##   Puerto Rico (ST FIPS 72) (no election data)</span></span>
+<span id="cb2-35"><a href="gis-data-download-and-preparation.html#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="do">##   Alaska (ST FIPS 02) (voting data isn&#39;t reported by county...we could also map the legislative districts, but we&#39;re not going to since we&#39;d rather have smaller maps without those extra details)</span></span>
+<span id="cb2-36"><a href="gis-data-download-and-preparation.html#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="do">##   Hawaii (ST FIPS 15) (so our map can zoom in on continental 48 states)</span></span>
+<span id="cb2-37"><a href="gis-data-download-and-preparation.html#cb2-37" aria-hidden="true" tabindex="-1"></a>countyGIS <span class="ot">&lt;-</span> countyGIS <span class="sc">%&gt;%</span> <span class="fu">filter</span>(stFIPS <span class="sc">!=</span> <span class="st">&quot;72&quot;</span> <span class="sc">&amp;</span> stFIPS <span class="sc">!=</span> <span class="st">&quot;02&quot;</span>)</span>
+<span id="cb2-38"><a href="gis-data-download-and-preparation.html#cb2-38" aria-hidden="true" tabindex="-1"></a>stateGIS <span class="ot">&lt;-</span> stateGIS <span class="sc">%&gt;%</span> <span class="fu">filter</span>(GEOID <span class="sc">!=</span> <span class="st">&quot;72&quot;</span> <span class="sc">&amp;</span> GEOID <span class="sc">!=</span> <span class="st">&quot;02&quot;</span> <span class="sc">&amp;</span> GEOID <span class="sc">!=</span> <span class="st">&quot;15&quot;</span>)</span>
+<span id="cb2-39"><a href="gis-data-download-and-preparation.html#cb2-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-40"><a href="gis-data-download-and-preparation.html#cb2-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-41"><a href="gis-data-download-and-preparation.html#cb2-41" aria-hidden="true" tabindex="-1"></a><span class="do">## join 2-character state abbreviation and create name = county, ST for labeling maps</span></span>
+<span id="cb2-42"><a href="gis-data-download-and-preparation.html#cb2-42" aria-hidden="true" tabindex="-1"></a>fipsToSTcode <span class="ot">&lt;-</span> fips_codes <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="at">stFIPS =</span> state_code, <span class="at">stNAME =</span> state) <span class="sc">%&gt;%</span> <span class="fu">unique</span>()</span>
+<span id="cb2-43"><a href="gis-data-download-and-preparation.html#cb2-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-44"><a href="gis-data-download-and-preparation.html#cb2-44" aria-hidden="true" tabindex="-1"></a>countyGIS <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(countyGIS,fipsToSTcode,<span class="at">by=</span><span class="st">&quot;stFIPS&quot;</span>)</span>
+<span id="cb2-45"><a href="gis-data-download-and-preparation.html#cb2-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-46"><a href="gis-data-download-and-preparation.html#cb2-46" aria-hidden="true" tabindex="-1"></a>countyGIS <span class="ot">&lt;-</span> countyGIS <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">name =</span> <span class="fu">paste0</span>(coNAME,<span class="st">&quot;, &quot;</span>, stNAME))</span>
+<span id="cb2-47"><a href="gis-data-download-and-preparation.html#cb2-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-48"><a href="gis-data-download-and-preparation.html#cb2-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-49"><a href="gis-data-download-and-preparation.html#cb2-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-50"><a href="gis-data-download-and-preparation.html#cb2-50" aria-hidden="true" tabindex="-1"></a><span class="do">## </span><span class="al">NOTE</span><span class="do">: If you don&#39;t use keep_geo_vars = TRUE, you don&#39;t get separate STATEFP and COUNTYFP, but you can use mutate() and create stFIPS = substr(GEOID,1,2) and coFIPS = substr(GEOID,3,5)</span></span></code></pre></div>
 <p><strong>Category 1 variable 1</strong></p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="gis-data-download-and-preparation.html#cb7-1" aria-hidden="true" tabindex="-1"></a>white <span class="ot">&lt;-</span> <span class="fu">get_acs</span>(<span class="at">geography =</span> <span class="st">&quot;county&quot;</span>,</span>
-<span id="cb7-2"><a href="gis-data-download-and-preparation.html#cb7-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">variables =</span> <span class="st">&quot;B01001A_001&quot;</span>,</span>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="gis-data-download-and-preparation.html#cb3-1" aria-hidden="true" tabindex="-1"></a>white <span class="ot">&lt;-</span> <span class="fu">get_acs</span>(<span class="at">geography =</span> <span class="st">&quot;county&quot;</span>,</span>
+<span id="cb3-2"><a href="gis-data-download-and-preparation.html#cb3-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">variables =</span> <span class="st">&quot;B01001A_001&quot;</span>,</span>
+<span id="cb3-3"><a href="gis-data-download-and-preparation.html#cb3-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">geometry =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb3-4"><a href="gis-data-download-and-preparation.html#cb3-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">keep_geo_vars =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb3-5"><a href="gis-data-download-and-preparation.html#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="gis-data-download-and-preparation.html#cb3-6" aria-hidden="true" tabindex="-1"></a>white_filtered <span class="ot">&lt;-</span> white <span class="sc">%&gt;%</span></span>
+<span id="cb3-7"><a href="gis-data-download-and-preparation.html#cb3-7" aria-hidden="true" tabindex="-1"></a>                <span class="fu">select</span>(<span class="at">FIPS =</span> GEOID, </span>
+<span id="cb3-8"><a href="gis-data-download-and-preparation.html#cb3-8" aria-hidden="true" tabindex="-1"></a>                       <span class="at">pop_white =</span> estimate,</span>
+<span id="cb3-9"><a href="gis-data-download-and-preparation.html#cb3-9" aria-hidden="true" tabindex="-1"></a>                       <span class="at">moe_white =</span> moe)</span>
+<span id="cb3-10"><a href="gis-data-download-and-preparation.html#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="gis-data-download-and-preparation.html#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="gis-data-download-and-preparation.html#cb3-12" aria-hidden="true" tabindex="-1"></a>countyGIS <span class="ot">&lt;-</span> countyGIS <span class="sc">%&gt;%</span></span>
+<span id="cb3-13"><a href="gis-data-download-and-preparation.html#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(white_filtered, <span class="at">by =</span> <span class="st">&quot;FIPS&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-14"><a href="gis-data-download-and-preparation.html#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pct_white =</span> <span class="dv">100</span> <span class="sc">*</span> pop_white <span class="sc">/</span> pop) </span></code></pre></div>
+<p><strong>Category 1 variable 2</strong></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="gis-data-download-and-preparation.html#cb4-1" aria-hidden="true" tabindex="-1"></a>asian <span class="ot">&lt;-</span> <span class="fu">get_acs</span>(<span class="at">geography =</span> <span class="st">&quot;county&quot;</span>,</span>
+<span id="cb4-2"><a href="gis-data-download-and-preparation.html#cb4-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">variables =</span> <span class="st">&quot;B01001D_001&quot;</span>,</span>
+<span id="cb4-3"><a href="gis-data-download-and-preparation.html#cb4-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">geometry =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb4-4"><a href="gis-data-download-and-preparation.html#cb4-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">keep_geo_vars =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb4-5"><a href="gis-data-download-and-preparation.html#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="gis-data-download-and-preparation.html#cb4-6" aria-hidden="true" tabindex="-1"></a>asian_filtered <span class="ot">&lt;-</span> asian <span class="sc">%&gt;%</span></span>
+<span id="cb4-7"><a href="gis-data-download-and-preparation.html#cb4-7" aria-hidden="true" tabindex="-1"></a>                <span class="fu">select</span>(<span class="at">FIPS =</span> GEOID, </span>
+<span id="cb4-8"><a href="gis-data-download-and-preparation.html#cb4-8" aria-hidden="true" tabindex="-1"></a>                       <span class="at">pop_asian =</span> estimate,</span>
+<span id="cb4-9"><a href="gis-data-download-and-preparation.html#cb4-9" aria-hidden="true" tabindex="-1"></a>                       <span class="at">moe_asian =</span> moe)</span>
+<span id="cb4-10"><a href="gis-data-download-and-preparation.html#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="gis-data-download-and-preparation.html#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="gis-data-download-and-preparation.html#cb4-12" aria-hidden="true" tabindex="-1"></a>countyGIS <span class="ot">&lt;-</span> countyGIS <span class="sc">%&gt;%</span></span>
+<span id="cb4-13"><a href="gis-data-download-and-preparation.html#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(asian_filtered, <span class="at">by =</span> <span class="st">&quot;FIPS&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-14"><a href="gis-data-download-and-preparation.html#cb4-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pct_asian =</span> <span class="dv">100</span> <span class="sc">*</span> pop_asian <span class="sc">/</span> pop) </span></code></pre></div>
+<p><strong>Category 2 variable 1</strong></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="gis-data-download-and-preparation.html#cb5-1" aria-hidden="true" tabindex="-1"></a>white_age <span class="ot">&lt;-</span> <span class="fu">get_acs</span>(<span class="at">geography =</span> <span class="st">&quot;county&quot;</span>,</span>
+<span id="cb5-2"><a href="gis-data-download-and-preparation.html#cb5-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">variables =</span> <span class="fu">c</span>(<span class="st">&quot;B01001A_007&quot;</span>, <span class="st">&quot;B01001A_008&quot;</span>, <span class="st">&quot;B01001A_009&quot;</span>, <span class="st">&quot;B01001A_010&quot;</span>, <span class="st">&quot;B01001A_011&quot;</span>, <span class="st">&quot;B01001A_012&quot;</span>, <span class="st">&quot;B01001A_013&quot;</span>, <span class="st">&quot;B01001A_014&quot;</span>, <span class="st">&quot;B01001A_015&quot;</span>, <span class="st">&quot;B01001A_016&quot;</span>, <span class="st">&quot;B01001A_022&quot;</span>, <span class="st">&quot;B01001A_023&quot;</span>, <span class="st">&quot;B01001A_024&quot;</span>, <span class="st">&quot;B01001A_025&quot;</span>, <span class="st">&quot;B01001A_026&quot;</span>, <span class="st">&quot;B01001A_027&quot;</span>, <span class="st">&quot;B01001A_028&quot;</span>, <span class="st">&quot;B01001A_029&quot;</span>, <span class="st">&quot;B01001A_030&quot;</span>, <span class="st">&quot;B01001A_031&quot;</span>),</span>
+<span id="cb5-3"><a href="gis-data-download-and-preparation.html#cb5-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">geometry =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb5-4"><a href="gis-data-download-and-preparation.html#cb5-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">keep_geo_vars =</span> <span class="cn">TRUE</span>, <span class="at">output =</span> <span class="st">&quot;wide&quot;</span>)</span>
+<span id="cb5-5"><a href="gis-data-download-and-preparation.html#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="gis-data-download-and-preparation.html#cb5-6" aria-hidden="true" tabindex="-1"></a>whiteage_filtered <span class="ot">&lt;-</span> white_age <span class="sc">%&gt;%</span> </span>
+<span id="cb5-7"><a href="gis-data-download-and-preparation.html#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">estimate =</span> <span class="fu">c</span>(B01001A_007E <span class="sc">+</span> B01001A_008E <span class="sc">+</span> B01001A_009E <span class="sc">+</span> B01001A_010E <span class="sc">+</span> B01001A_011E <span class="sc">+</span> B01001A_012E <span class="sc">+</span> B01001A_013E <span class="sc">+</span> B01001A_014E <span class="sc">+</span> B01001A_015E <span class="sc">+</span> B01001A_016E <span class="sc">+</span> B01001A_022E <span class="sc">+</span> B01001A_023E <span class="sc">+</span> B01001A_024E <span class="sc">+</span> B01001A_025E <span class="sc">+</span> B01001A_026E <span class="sc">+</span> B01001A_027E <span class="sc">+</span> B01001A_028E <span class="sc">+</span> B01001A_029E <span class="sc">+</span> B01001A_030E <span class="sc">+</span> B01001A_031E)) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-8"><a href="gis-data-download-and-preparation.html#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">moe =</span> B01001A_007M <span class="sc">+</span> B01001A_008M <span class="sc">+</span> B01001A_009M <span class="sc">+</span> B01001A_010M <span class="sc">+</span> B01001A_011M <span class="sc">+</span> B01001A_012M <span class="sc">+</span> B01001A_013M <span class="sc">+</span> B01001A_014M <span class="sc">+</span> B01001A_015M <span class="sc">+</span> B01001A_016M <span class="sc">+</span> B01001A_022M <span class="sc">+</span> B01001A_023M <span class="sc">+</span> B01001A_024M <span class="sc">+</span> B01001A_025M <span class="sc">+</span> B01001A_026M <span class="sc">+</span> B01001A_027M <span class="sc">+</span> B01001A_028M <span class="sc">+</span> B01001A_029M <span class="sc">+</span> B01001A_030M <span class="sc">+</span> B01001A_031M) <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="at">FIPS =</span> GEOID, </span>
+<span id="cb5-9"><a href="gis-data-download-and-preparation.html#cb5-9" aria-hidden="true" tabindex="-1"></a>                       <span class="at">pop_whiteage =</span> estimate,</span>
+<span id="cb5-10"><a href="gis-data-download-and-preparation.html#cb5-10" aria-hidden="true" tabindex="-1"></a>                       <span class="at">moe_whiteage =</span> moe)</span>
+<span id="cb5-11"><a href="gis-data-download-and-preparation.html#cb5-11" aria-hidden="true" tabindex="-1"></a>                       </span>
+<span id="cb5-12"><a href="gis-data-download-and-preparation.html#cb5-12" aria-hidden="true" tabindex="-1"></a>countyGIS <span class="ot">&lt;-</span> countyGIS <span class="sc">%&gt;%</span></span>
+<span id="cb5-13"><a href="gis-data-download-and-preparation.html#cb5-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(whiteage_filtered, <span class="at">by =</span> <span class="st">&quot;FIPS&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-14"><a href="gis-data-download-and-preparation.html#cb5-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pct_whiteage =</span> <span class="dv">100</span> <span class="sc">*</span> pop_whiteage <span class="sc">/</span> pop) </span></code></pre></div>
+<p><strong>Category 2 variable 2</strong></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="gis-data-download-and-preparation.html#cb6-1" aria-hidden="true" tabindex="-1"></a>asian_age <span class="ot">&lt;-</span> <span class="fu">get_acs</span>(<span class="at">geography =</span> <span class="st">&quot;county&quot;</span>,</span>
+<span id="cb6-2"><a href="gis-data-download-and-preparation.html#cb6-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">variables =</span> <span class="fu">c</span>(<span class="st">&quot;B01001D_007&quot;</span>, <span class="st">&quot;B01001D_008&quot;</span>, <span class="st">&quot;B01001D_009&quot;</span>, <span class="st">&quot;B01001D_010&quot;</span>, <span class="st">&quot;B01001D_011&quot;</span>, <span class="st">&quot;B01001D_012&quot;</span>, <span class="st">&quot;B01001D_013&quot;</span>, <span class="st">&quot;B01001D_014&quot;</span>, <span class="st">&quot;B01001D_015&quot;</span>, <span class="st">&quot;B01001D_016&quot;</span>, <span class="st">&quot;B01001D_022&quot;</span>, <span class="st">&quot;B01001D_023&quot;</span>, <span class="st">&quot;B01001D_024&quot;</span>, <span class="st">&quot;B01001D_025&quot;</span>, <span class="st">&quot;B01001D_026&quot;</span>, <span class="st">&quot;B01001D_027&quot;</span>, <span class="st">&quot;B01001D_028&quot;</span>, <span class="st">&quot;B01001D_029&quot;</span>, <span class="st">&quot;B01001D_030&quot;</span>, <span class="st">&quot;B01001D_031&quot;</span>),</span>
+<span id="cb6-3"><a href="gis-data-download-and-preparation.html#cb6-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">geometry =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb6-4"><a href="gis-data-download-and-preparation.html#cb6-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">keep_geo_vars =</span> <span class="cn">TRUE</span>, <span class="at">output =</span> <span class="st">&quot;wide&quot;</span>)</span>
+<span id="cb6-5"><a href="gis-data-download-and-preparation.html#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="gis-data-download-and-preparation.html#cb6-6" aria-hidden="true" tabindex="-1"></a>asianage_filtered <span class="ot">&lt;-</span> asian_age <span class="sc">%&gt;%</span> </span>
+<span id="cb6-7"><a href="gis-data-download-and-preparation.html#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">estimate =</span> <span class="fu">c</span>(B01001D_007E <span class="sc">+</span> B01001D_008E <span class="sc">+</span> B01001D_009E <span class="sc">+</span> B01001D_010E <span class="sc">+</span> B01001D_011E <span class="sc">+</span> B01001D_012E <span class="sc">+</span> B01001D_013E <span class="sc">+</span> B01001D_014E <span class="sc">+</span> B01001D_015E <span class="sc">+</span> B01001D_016E <span class="sc">+</span> B01001D_022E <span class="sc">+</span> B01001D_023E <span class="sc">+</span> B01001D_024E <span class="sc">+</span> B01001D_025E <span class="sc">+</span> B01001D_026E <span class="sc">+</span> B01001D_027E <span class="sc">+</span> B01001D_028E <span class="sc">+</span> B01001D_029E <span class="sc">+</span> B01001D_030E <span class="sc">+</span> B01001D_031E)) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-8"><a href="gis-data-download-and-preparation.html#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">moe =</span> B01001D_007M <span class="sc">+</span> B01001D_008M <span class="sc">+</span> B01001D_009M <span class="sc">+</span> B01001D_010M <span class="sc">+</span> B01001D_011M <span class="sc">+</span> B01001D_012M <span class="sc">+</span> B01001D_013M <span class="sc">+</span> B01001D_014M <span class="sc">+</span> B01001D_015M <span class="sc">+</span> B01001D_016M <span class="sc">+</span> B01001D_022M <span class="sc">+</span> B01001D_023M <span class="sc">+</span> B01001D_024M <span class="sc">+</span> B01001D_025M <span class="sc">+</span> B01001D_026M <span class="sc">+</span> B01001D_027M <span class="sc">+</span> B01001D_028M <span class="sc">+</span> B01001D_029M <span class="sc">+</span> B01001D_030M <span class="sc">+</span> B01001D_031M) <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="at">FIPS =</span> GEOID, </span>
+<span id="cb6-9"><a href="gis-data-download-and-preparation.html#cb6-9" aria-hidden="true" tabindex="-1"></a>                       <span class="at">pop_asianage =</span> estimate,</span>
+<span id="cb6-10"><a href="gis-data-download-and-preparation.html#cb6-10" aria-hidden="true" tabindex="-1"></a>                       <span class="at">moe_asianage =</span> moe)</span>
+<span id="cb6-11"><a href="gis-data-download-and-preparation.html#cb6-11" aria-hidden="true" tabindex="-1"></a>                       </span>
+<span id="cb6-12"><a href="gis-data-download-and-preparation.html#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="gis-data-download-and-preparation.html#cb6-13" aria-hidden="true" tabindex="-1"></a>countyGIS <span class="ot">&lt;-</span> countyGIS <span class="sc">%&gt;%</span></span>
+<span id="cb6-14"><a href="gis-data-download-and-preparation.html#cb6-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(asianage_filtered, <span class="at">by =</span> <span class="st">&quot;FIPS&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb6-15"><a href="gis-data-download-and-preparation.html#cb6-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pct_asianage =</span> <span class="dv">100</span> <span class="sc">*</span> pop_asianage <span class="sc">/</span> pop)</span></code></pre></div>
+<p><strong>Category 3 variable 1</strong></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="gis-data-download-and-preparation.html#cb7-1" aria-hidden="true" tabindex="-1"></a>us_citizen_us_born <span class="ot">&lt;-</span> <span class="fu">get_acs</span>(<span class="at">geography =</span> <span class="st">&quot;county&quot;</span>,</span>
+<span id="cb7-2"><a href="gis-data-download-and-preparation.html#cb7-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">variables =</span> <span class="st">&quot;B05001_002&quot;</span>,</span>
 <span id="cb7-3"><a href="gis-data-download-and-preparation.html#cb7-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">geometry =</span> <span class="cn">FALSE</span>,</span>
 <span id="cb7-4"><a href="gis-data-download-and-preparation.html#cb7-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">keep_geo_vars =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb7-5"><a href="gis-data-download-and-preparation.html#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-6"><a href="gis-data-download-and-preparation.html#cb7-6" aria-hidden="true" tabindex="-1"></a>white_filtered <span class="ot">&lt;-</span> white <span class="sc">%&gt;%</span></span>
+<span id="cb7-6"><a href="gis-data-download-and-preparation.html#cb7-6" aria-hidden="true" tabindex="-1"></a>us_citizen_us_born_filtered <span class="ot">&lt;-</span> us_citizen_us_born <span class="sc">%&gt;%</span></span>
 <span id="cb7-7"><a href="gis-data-download-and-preparation.html#cb7-7" aria-hidden="true" tabindex="-1"></a>                <span class="fu">select</span>(<span class="at">FIPS =</span> GEOID, </span>
-<span id="cb7-8"><a href="gis-data-download-and-preparation.html#cb7-8" aria-hidden="true" tabindex="-1"></a>                       <span class="at">pop_white =</span> estimate,</span>
-<span id="cb7-9"><a href="gis-data-download-and-preparation.html#cb7-9" aria-hidden="true" tabindex="-1"></a>                       <span class="at">moe_white =</span> moe)</span>
+<span id="cb7-8"><a href="gis-data-download-and-preparation.html#cb7-8" aria-hidden="true" tabindex="-1"></a>                       <span class="at">pop_us_born =</span> estimate,</span>
+<span id="cb7-9"><a href="gis-data-download-and-preparation.html#cb7-9" aria-hidden="true" tabindex="-1"></a>                       <span class="at">moe_us_born =</span> moe)</span>
 <span id="cb7-10"><a href="gis-data-download-and-preparation.html#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-11"><a href="gis-data-download-and-preparation.html#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-12"><a href="gis-data-download-and-preparation.html#cb7-12" aria-hidden="true" tabindex="-1"></a>countyGIS <span class="ot">&lt;-</span> countyGIS <span class="sc">%&gt;%</span></span>
-<span id="cb7-13"><a href="gis-data-download-and-preparation.html#cb7-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(white_filtered, <span class="at">by =</span> <span class="st">&quot;FIPS&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb7-14"><a href="gis-data-download-and-preparation.html#cb7-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pct_white =</span> <span class="dv">100</span> <span class="sc">*</span> pop_white <span class="sc">/</span> pop) </span></code></pre></div>
-<p><strong>Category 1 variable 2</strong></p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="gis-data-download-and-preparation.html#cb8-1" aria-hidden="true" tabindex="-1"></a>asian <span class="ot">&lt;-</span> <span class="fu">get_acs</span>(<span class="at">geography =</span> <span class="st">&quot;county&quot;</span>,</span>
-<span id="cb8-2"><a href="gis-data-download-and-preparation.html#cb8-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">variables =</span> <span class="st">&quot;B01001D_001&quot;</span>,</span>
+<span id="cb7-13"><a href="gis-data-download-and-preparation.html#cb7-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(us_citizen_us_born_filtered, <span class="at">by =</span> <span class="st">&quot;FIPS&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb7-14"><a href="gis-data-download-and-preparation.html#cb7-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pct_us_born =</span> <span class="dv">100</span> <span class="sc">*</span> pop_us_born <span class="sc">/</span> pop) </span></code></pre></div>
+<p><strong>Category 3 variable 2</strong></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="gis-data-download-and-preparation.html#cb8-1" aria-hidden="true" tabindex="-1"></a>us_citizen_naturalized <span class="ot">&lt;-</span> <span class="fu">get_acs</span>(<span class="at">geography =</span> <span class="st">&quot;county&quot;</span>,</span>
+<span id="cb8-2"><a href="gis-data-download-and-preparation.html#cb8-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">variables =</span> <span class="st">&quot;B05001_005&quot;</span>,</span>
 <span id="cb8-3"><a href="gis-data-download-and-preparation.html#cb8-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">geometry =</span> <span class="cn">FALSE</span>,</span>
 <span id="cb8-4"><a href="gis-data-download-and-preparation.html#cb8-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">keep_geo_vars =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb8-5"><a href="gis-data-download-and-preparation.html#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-6"><a href="gis-data-download-and-preparation.html#cb8-6" aria-hidden="true" tabindex="-1"></a>asian_filtered <span class="ot">&lt;-</span> asian <span class="sc">%&gt;%</span></span>
+<span id="cb8-6"><a href="gis-data-download-and-preparation.html#cb8-6" aria-hidden="true" tabindex="-1"></a>us_citizen_naturalized_filtered <span class="ot">&lt;-</span> us_citizen_naturalized <span class="sc">%&gt;%</span></span>
 <span id="cb8-7"><a href="gis-data-download-and-preparation.html#cb8-7" aria-hidden="true" tabindex="-1"></a>                <span class="fu">select</span>(<span class="at">FIPS =</span> GEOID, </span>
-<span id="cb8-8"><a href="gis-data-download-and-preparation.html#cb8-8" aria-hidden="true" tabindex="-1"></a>                       <span class="at">pop_asian =</span> estimate,</span>
-<span id="cb8-9"><a href="gis-data-download-and-preparation.html#cb8-9" aria-hidden="true" tabindex="-1"></a>                       <span class="at">moe_asian =</span> moe)</span>
+<span id="cb8-8"><a href="gis-data-download-and-preparation.html#cb8-8" aria-hidden="true" tabindex="-1"></a>                       <span class="at">pop_us_naturalized =</span> estimate,</span>
+<span id="cb8-9"><a href="gis-data-download-and-preparation.html#cb8-9" aria-hidden="true" tabindex="-1"></a>                       <span class="at">moe_us_naturalized =</span> moe)</span>
 <span id="cb8-10"><a href="gis-data-download-and-preparation.html#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-11"><a href="gis-data-download-and-preparation.html#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-12"><a href="gis-data-download-and-preparation.html#cb8-12" aria-hidden="true" tabindex="-1"></a>countyGIS <span class="ot">&lt;-</span> countyGIS <span class="sc">%&gt;%</span></span>
-<span id="cb8-13"><a href="gis-data-download-and-preparation.html#cb8-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(asian_filtered, <span class="at">by =</span> <span class="st">&quot;FIPS&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb8-14"><a href="gis-data-download-and-preparation.html#cb8-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pct_asian =</span> <span class="dv">100</span> <span class="sc">*</span> pop_asian <span class="sc">/</span> pop) </span></code></pre></div>
-<p><strong>Category 2 variable 1</strong></p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="gis-data-download-and-preparation.html#cb9-1" aria-hidden="true" tabindex="-1"></a>white_age <span class="ot">&lt;-</span> <span class="fu">get_acs</span>(<span class="at">geography =</span> <span class="st">&quot;county&quot;</span>,</span>
-<span id="cb9-2"><a href="gis-data-download-and-preparation.html#cb9-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">variables =</span> <span class="fu">c</span>(<span class="st">&quot;B01001A_007&quot;</span>, <span class="st">&quot;B01001A_008&quot;</span>, <span class="st">&quot;B01001A_009&quot;</span>, <span class="st">&quot;B01001A_010&quot;</span>, <span class="st">&quot;B01001A_011&quot;</span>, <span class="st">&quot;B01001A_012&quot;</span>, <span class="st">&quot;B01001A_013&quot;</span>, <span class="st">&quot;B01001A_014&quot;</span>, <span class="st">&quot;B01001A_015&quot;</span>, <span class="st">&quot;B01001A_016&quot;</span>, <span class="st">&quot;B01001A_022&quot;</span>, <span class="st">&quot;B01001A_023&quot;</span>, <span class="st">&quot;B01001A_024&quot;</span>, <span class="st">&quot;B01001A_025&quot;</span>, <span class="st">&quot;B01001A_026&quot;</span>, <span class="st">&quot;B01001A_027&quot;</span>, <span class="st">&quot;B01001A_028&quot;</span>, <span class="st">&quot;B01001A_029&quot;</span>, <span class="st">&quot;B01001A_030&quot;</span>, <span class="st">&quot;B01001A_031&quot;</span>),</span>
-<span id="cb9-3"><a href="gis-data-download-and-preparation.html#cb9-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">geometry =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb9-4"><a href="gis-data-download-and-preparation.html#cb9-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">keep_geo_vars =</span> <span class="cn">TRUE</span>, <span class="at">output =</span> <span class="st">&quot;wide&quot;</span>)</span>
-<span id="cb9-5"><a href="gis-data-download-and-preparation.html#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-6"><a href="gis-data-download-and-preparation.html#cb9-6" aria-hidden="true" tabindex="-1"></a>whiteage_filtered <span class="ot">&lt;-</span> white_age <span class="sc">%&gt;%</span> </span>
-<span id="cb9-7"><a href="gis-data-download-and-preparation.html#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">estimate =</span> <span class="fu">c</span>(B01001A_007E <span class="sc">+</span> B01001A_008E <span class="sc">+</span> B01001A_009E <span class="sc">+</span> B01001A_010E <span class="sc">+</span> B01001A_011E <span class="sc">+</span> B01001A_012E <span class="sc">+</span> B01001A_013E <span class="sc">+</span> B01001A_014E <span class="sc">+</span> B01001A_015E <span class="sc">+</span> B01001A_016E <span class="sc">+</span> B01001A_022E <span class="sc">+</span> B01001A_023E <span class="sc">+</span> B01001A_024E <span class="sc">+</span> B01001A_025E <span class="sc">+</span> B01001A_026E <span class="sc">+</span> B01001A_027E <span class="sc">+</span> B01001A_028E <span class="sc">+</span> B01001A_029E <span class="sc">+</span> B01001A_030E <span class="sc">+</span> B01001A_031E)) <span class="sc">%&gt;%</span> </span>
-<span id="cb9-8"><a href="gis-data-download-and-preparation.html#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">moe =</span> B01001A_007M <span class="sc">+</span> B01001A_008M <span class="sc">+</span> B01001A_009M <span class="sc">+</span> B01001A_010M <span class="sc">+</span> B01001A_011M <span class="sc">+</span> B01001A_012M <span class="sc">+</span> B01001A_013M <span class="sc">+</span> B01001A_014M <span class="sc">+</span> B01001A_015M <span class="sc">+</span> B01001A_016M <span class="sc">+</span> B01001A_022M <span class="sc">+</span> B01001A_023M <span class="sc">+</span> B01001A_024M <span class="sc">+</span> B01001A_025M <span class="sc">+</span> B01001A_026M <span class="sc">+</span> B01001A_027M <span class="sc">+</span> B01001A_028M <span class="sc">+</span> B01001A_029M <span class="sc">+</span> B01001A_030M <span class="sc">+</span> B01001A_031M) <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="at">FIPS =</span> GEOID, </span>
-<span id="cb9-9"><a href="gis-data-download-and-preparation.html#cb9-9" aria-hidden="true" tabindex="-1"></a>                       <span class="at">pop_whiteage =</span> estimate,</span>
-<span id="cb9-10"><a href="gis-data-download-and-preparation.html#cb9-10" aria-hidden="true" tabindex="-1"></a>                       <span class="at">moe_whiteage =</span> moe)</span>
-<span id="cb9-11"><a href="gis-data-download-and-preparation.html#cb9-11" aria-hidden="true" tabindex="-1"></a>                       </span>
-<span id="cb9-12"><a href="gis-data-download-and-preparation.html#cb9-12" aria-hidden="true" tabindex="-1"></a>countyGIS <span class="ot">&lt;-</span> countyGIS <span class="sc">%&gt;%</span></span>
-<span id="cb9-13"><a href="gis-data-download-and-preparation.html#cb9-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(whiteage_filtered, <span class="at">by =</span> <span class="st">&quot;FIPS&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb9-14"><a href="gis-data-download-and-preparation.html#cb9-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pct_whiteage =</span> <span class="dv">100</span> <span class="sc">*</span> pop_whiteage <span class="sc">/</span> pop) </span></code></pre></div>
-<p><strong>Category 2 variable 2</strong></p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="gis-data-download-and-preparation.html#cb10-1" aria-hidden="true" tabindex="-1"></a>asian_age <span class="ot">&lt;-</span> <span class="fu">get_acs</span>(<span class="at">geography =</span> <span class="st">&quot;county&quot;</span>,</span>
-<span id="cb10-2"><a href="gis-data-download-and-preparation.html#cb10-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">variables =</span> <span class="fu">c</span>(<span class="st">&quot;B01001D_007&quot;</span>, <span class="st">&quot;B01001D_008&quot;</span>, <span class="st">&quot;B01001D_009&quot;</span>, <span class="st">&quot;B01001D_010&quot;</span>, <span class="st">&quot;B01001D_011&quot;</span>, <span class="st">&quot;B01001D_012&quot;</span>, <span class="st">&quot;B01001D_013&quot;</span>, <span class="st">&quot;B01001D_014&quot;</span>, <span class="st">&quot;B01001D_015&quot;</span>, <span class="st">&quot;B01001D_016&quot;</span>, <span class="st">&quot;B01001D_022&quot;</span>, <span class="st">&quot;B01001D_023&quot;</span>, <span class="st">&quot;B01001D_024&quot;</span>, <span class="st">&quot;B01001D_025&quot;</span>, <span class="st">&quot;B01001D_026&quot;</span>, <span class="st">&quot;B01001D_027&quot;</span>, <span class="st">&quot;B01001D_028&quot;</span>, <span class="st">&quot;B01001D_029&quot;</span>, <span class="st">&quot;B01001D_030&quot;</span>, <span class="st">&quot;B01001D_031&quot;</span>),</span>
-<span id="cb10-3"><a href="gis-data-download-and-preparation.html#cb10-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">geometry =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb10-4"><a href="gis-data-download-and-preparation.html#cb10-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">keep_geo_vars =</span> <span class="cn">TRUE</span>, <span class="at">output =</span> <span class="st">&quot;wide&quot;</span>)</span>
-<span id="cb10-5"><a href="gis-data-download-and-preparation.html#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-6"><a href="gis-data-download-and-preparation.html#cb10-6" aria-hidden="true" tabindex="-1"></a>asianage_filtered <span class="ot">&lt;-</span> asian_age <span class="sc">%&gt;%</span> </span>
-<span id="cb10-7"><a href="gis-data-download-and-preparation.html#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">estimate =</span> <span class="fu">c</span>(B01001D_007E <span class="sc">+</span> B01001D_008E <span class="sc">+</span> B01001D_009E <span class="sc">+</span> B01001D_010E <span class="sc">+</span> B01001D_011E <span class="sc">+</span> B01001D_012E <span class="sc">+</span> B01001D_013E <span class="sc">+</span> B01001D_014E <span class="sc">+</span> B01001D_015E <span class="sc">+</span> B01001D_016E <span class="sc">+</span> B01001D_022E <span class="sc">+</span> B01001D_023E <span class="sc">+</span> B01001D_024E <span class="sc">+</span> B01001D_025E <span class="sc">+</span> B01001D_026E <span class="sc">+</span> B01001D_027E <span class="sc">+</span> B01001D_028E <span class="sc">+</span> B01001D_029E <span class="sc">+</span> B01001D_030E <span class="sc">+</span> B01001D_031E)) <span class="sc">%&gt;%</span> </span>
-<span id="cb10-8"><a href="gis-data-download-and-preparation.html#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">moe =</span> B01001D_007M <span class="sc">+</span> B01001D_008M <span class="sc">+</span> B01001D_009M <span class="sc">+</span> B01001D_010M <span class="sc">+</span> B01001D_011M <span class="sc">+</span> B01001D_012M <span class="sc">+</span> B01001D_013M <span class="sc">+</span> B01001D_014M <span class="sc">+</span> B01001D_015M <span class="sc">+</span> B01001D_016M <span class="sc">+</span> B01001D_022M <span class="sc">+</span> B01001D_023M <span class="sc">+</span> B01001D_024M <span class="sc">+</span> B01001D_025M <span class="sc">+</span> B01001D_026M <span class="sc">+</span> B01001D_027M <span class="sc">+</span> B01001D_028M <span class="sc">+</span> B01001D_029M <span class="sc">+</span> B01001D_030M <span class="sc">+</span> B01001D_031M) <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="at">FIPS =</span> GEOID, </span>
-<span id="cb10-9"><a href="gis-data-download-and-preparation.html#cb10-9" aria-hidden="true" tabindex="-1"></a>                       <span class="at">pop_asianage =</span> estimate,</span>
-<span id="cb10-10"><a href="gis-data-download-and-preparation.html#cb10-10" aria-hidden="true" tabindex="-1"></a>                       <span class="at">moe_asianage =</span> moe)</span>
-<span id="cb10-11"><a href="gis-data-download-and-preparation.html#cb10-11" aria-hidden="true" tabindex="-1"></a>                       </span>
-<span id="cb10-12"><a href="gis-data-download-and-preparation.html#cb10-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-13"><a href="gis-data-download-and-preparation.html#cb10-13" aria-hidden="true" tabindex="-1"></a>countyGIS <span class="ot">&lt;-</span> countyGIS <span class="sc">%&gt;%</span></span>
-<span id="cb10-14"><a href="gis-data-download-and-preparation.html#cb10-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(asianage_filtered, <span class="at">by =</span> <span class="st">&quot;FIPS&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb10-15"><a href="gis-data-download-and-preparation.html#cb10-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pct_asianage =</span> <span class="dv">100</span> <span class="sc">*</span> pop_asianage <span class="sc">/</span> pop)</span></code></pre></div>
-<p><strong>Category 3 variable 1</strong></p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="gis-data-download-and-preparation.html#cb11-1" aria-hidden="true" tabindex="-1"></a>us_citizen_us_born <span class="ot">&lt;-</span> <span class="fu">get_acs</span>(<span class="at">geography =</span> <span class="st">&quot;county&quot;</span>,</span>
-<span id="cb11-2"><a href="gis-data-download-and-preparation.html#cb11-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">variables =</span> <span class="st">&quot;B05001_002&quot;</span>,</span>
-<span id="cb11-3"><a href="gis-data-download-and-preparation.html#cb11-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">geometry =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb11-4"><a href="gis-data-download-and-preparation.html#cb11-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">keep_geo_vars =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb11-5"><a href="gis-data-download-and-preparation.html#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-6"><a href="gis-data-download-and-preparation.html#cb11-6" aria-hidden="true" tabindex="-1"></a>us_citizen_us_born_filtered <span class="ot">&lt;-</span> us_citizen_us_born <span class="sc">%&gt;%</span></span>
-<span id="cb11-7"><a href="gis-data-download-and-preparation.html#cb11-7" aria-hidden="true" tabindex="-1"></a>                <span class="fu">select</span>(<span class="at">FIPS =</span> GEOID, </span>
-<span id="cb11-8"><a href="gis-data-download-and-preparation.html#cb11-8" aria-hidden="true" tabindex="-1"></a>                       <span class="at">pop_us_born =</span> estimate,</span>
-<span id="cb11-9"><a href="gis-data-download-and-preparation.html#cb11-9" aria-hidden="true" tabindex="-1"></a>                       <span class="at">moe_us_born =</span> moe)</span>
-<span id="cb11-10"><a href="gis-data-download-and-preparation.html#cb11-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-11"><a href="gis-data-download-and-preparation.html#cb11-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-12"><a href="gis-data-download-and-preparation.html#cb11-12" aria-hidden="true" tabindex="-1"></a>countyGIS <span class="ot">&lt;-</span> countyGIS <span class="sc">%&gt;%</span></span>
-<span id="cb11-13"><a href="gis-data-download-and-preparation.html#cb11-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(us_citizen_us_born_filtered, <span class="at">by =</span> <span class="st">&quot;FIPS&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb11-14"><a href="gis-data-download-and-preparation.html#cb11-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pct_us_born =</span> <span class="dv">100</span> <span class="sc">*</span> pop_us_born <span class="sc">/</span> pop) </span></code></pre></div>
-<p><strong>Category 3 variable 2</strong></p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="gis-data-download-and-preparation.html#cb12-1" aria-hidden="true" tabindex="-1"></a>us_citizen_naturalized <span class="ot">&lt;-</span> <span class="fu">get_acs</span>(<span class="at">geography =</span> <span class="st">&quot;county&quot;</span>,</span>
-<span id="cb12-2"><a href="gis-data-download-and-preparation.html#cb12-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">variables =</span> <span class="st">&quot;B05001_005&quot;</span>,</span>
-<span id="cb12-3"><a href="gis-data-download-and-preparation.html#cb12-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">geometry =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb12-4"><a href="gis-data-download-and-preparation.html#cb12-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">keep_geo_vars =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb12-5"><a href="gis-data-download-and-preparation.html#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-6"><a href="gis-data-download-and-preparation.html#cb12-6" aria-hidden="true" tabindex="-1"></a>us_citizen_naturalized_filtered <span class="ot">&lt;-</span> us_citizen_naturalized <span class="sc">%&gt;%</span></span>
-<span id="cb12-7"><a href="gis-data-download-and-preparation.html#cb12-7" aria-hidden="true" tabindex="-1"></a>                <span class="fu">select</span>(<span class="at">FIPS =</span> GEOID, </span>
-<span id="cb12-8"><a href="gis-data-download-and-preparation.html#cb12-8" aria-hidden="true" tabindex="-1"></a>                       <span class="at">pop_us_naturalized =</span> estimate,</span>
-<span id="cb12-9"><a href="gis-data-download-and-preparation.html#cb12-9" aria-hidden="true" tabindex="-1"></a>                       <span class="at">moe_us_naturalized =</span> moe)</span>
-<span id="cb12-10"><a href="gis-data-download-and-preparation.html#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-11"><a href="gis-data-download-and-preparation.html#cb12-11" aria-hidden="true" tabindex="-1"></a>countyGIS <span class="ot">&lt;-</span> countyGIS <span class="sc">%&gt;%</span></span>
-<span id="cb12-12"><a href="gis-data-download-and-preparation.html#cb12-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(us_citizen_naturalized_filtered, <span class="at">by =</span> <span class="st">&quot;FIPS&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb12-13"><a href="gis-data-download-and-preparation.html#cb12-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pct_us_naturalized =</span> <span class="dv">100</span> <span class="sc">*</span> pop_us_naturalized <span class="sc">/</span> pop) </span></code></pre></div>
+<span id="cb8-11"><a href="gis-data-download-and-preparation.html#cb8-11" aria-hidden="true" tabindex="-1"></a>countyGIS <span class="ot">&lt;-</span> countyGIS <span class="sc">%&gt;%</span></span>
+<span id="cb8-12"><a href="gis-data-download-and-preparation.html#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(us_citizen_naturalized_filtered, <span class="at">by =</span> <span class="st">&quot;FIPS&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb8-13"><a href="gis-data-download-and-preparation.html#cb8-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pct_us_naturalized =</span> <span class="dv">100</span> <span class="sc">*</span> pop_us_naturalized <span class="sc">/</span> pop) </span></code></pre></div>
 <p><strong>Category 4 variable 1</strong></p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="gis-data-download-and-preparation.html#cb13-1" aria-hidden="true" tabindex="-1"></a>employment_male <span class="ot">&lt;-</span> <span class="fu">get_acs</span>(<span class="at">geography =</span> <span class="st">&quot;county&quot;</span>,</span>
-<span id="cb13-2"><a href="gis-data-download-and-preparation.html#cb13-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">variables =</span> <span class="st">&quot;B23001_002&quot;</span>,</span>
-<span id="cb13-3"><a href="gis-data-download-and-preparation.html#cb13-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">geometry =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb13-4"><a href="gis-data-download-and-preparation.html#cb13-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">keep_geo_vars =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb13-5"><a href="gis-data-download-and-preparation.html#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-6"><a href="gis-data-download-and-preparation.html#cb13-6" aria-hidden="true" tabindex="-1"></a>employment_male_filtered <span class="ot">&lt;-</span> employment_male <span class="sc">%&gt;%</span></span>
-<span id="cb13-7"><a href="gis-data-download-and-preparation.html#cb13-7" aria-hidden="true" tabindex="-1"></a>                <span class="fu">select</span>(<span class="at">FIPS =</span> GEOID, </span>
-<span id="cb13-8"><a href="gis-data-download-and-preparation.html#cb13-8" aria-hidden="true" tabindex="-1"></a>                       <span class="at">pop_employment_male =</span> estimate,</span>
-<span id="cb13-9"><a href="gis-data-download-and-preparation.html#cb13-9" aria-hidden="true" tabindex="-1"></a>                       <span class="at">moe_employment_male =</span> moe)</span>
-<span id="cb13-10"><a href="gis-data-download-and-preparation.html#cb13-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-11"><a href="gis-data-download-and-preparation.html#cb13-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-12"><a href="gis-data-download-and-preparation.html#cb13-12" aria-hidden="true" tabindex="-1"></a>countyGIS <span class="ot">&lt;-</span> countyGIS <span class="sc">%&gt;%</span></span>
-<span id="cb13-13"><a href="gis-data-download-and-preparation.html#cb13-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(employment_male_filtered, <span class="at">by =</span> <span class="st">&quot;FIPS&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb13-14"><a href="gis-data-download-and-preparation.html#cb13-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pct_employment_male =</span> <span class="dv">100</span> <span class="sc">*</span> pop_employment_male <span class="sc">/</span> pop)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="gis-data-download-and-preparation.html#cb9-1" aria-hidden="true" tabindex="-1"></a>employment_male <span class="ot">&lt;-</span> <span class="fu">get_acs</span>(<span class="at">geography =</span> <span class="st">&quot;county&quot;</span>,</span>
+<span id="cb9-2"><a href="gis-data-download-and-preparation.html#cb9-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">variables =</span> <span class="st">&quot;B23001_002&quot;</span>,</span>
+<span id="cb9-3"><a href="gis-data-download-and-preparation.html#cb9-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">geometry =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb9-4"><a href="gis-data-download-and-preparation.html#cb9-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">keep_geo_vars =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb9-5"><a href="gis-data-download-and-preparation.html#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="gis-data-download-and-preparation.html#cb9-6" aria-hidden="true" tabindex="-1"></a>employment_male_filtered <span class="ot">&lt;-</span> employment_male <span class="sc">%&gt;%</span></span>
+<span id="cb9-7"><a href="gis-data-download-and-preparation.html#cb9-7" aria-hidden="true" tabindex="-1"></a>                <span class="fu">select</span>(<span class="at">FIPS =</span> GEOID, </span>
+<span id="cb9-8"><a href="gis-data-download-and-preparation.html#cb9-8" aria-hidden="true" tabindex="-1"></a>                       <span class="at">pop_employment_male =</span> estimate,</span>
+<span id="cb9-9"><a href="gis-data-download-and-preparation.html#cb9-9" aria-hidden="true" tabindex="-1"></a>                       <span class="at">moe_employment_male =</span> moe)</span>
+<span id="cb9-10"><a href="gis-data-download-and-preparation.html#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="gis-data-download-and-preparation.html#cb9-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-12"><a href="gis-data-download-and-preparation.html#cb9-12" aria-hidden="true" tabindex="-1"></a>countyGIS <span class="ot">&lt;-</span> countyGIS <span class="sc">%&gt;%</span></span>
+<span id="cb9-13"><a href="gis-data-download-and-preparation.html#cb9-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(employment_male_filtered, <span class="at">by =</span> <span class="st">&quot;FIPS&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb9-14"><a href="gis-data-download-and-preparation.html#cb9-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pct_employment_male =</span> <span class="dv">100</span> <span class="sc">*</span> pop_employment_male <span class="sc">/</span> pop)</span></code></pre></div>
 <p><strong>Category 4 variable 2</strong></p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="gis-data-download-and-preparation.html#cb14-1" aria-hidden="true" tabindex="-1"></a>employment_female <span class="ot">&lt;-</span> <span class="fu">get_acs</span>(<span class="at">geography =</span> <span class="st">&quot;county&quot;</span>,</span>
-<span id="cb14-2"><a href="gis-data-download-and-preparation.html#cb14-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">variables =</span> <span class="st">&quot;B23001_088&quot;</span>,</span>
-<span id="cb14-3"><a href="gis-data-download-and-preparation.html#cb14-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">geometry =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb14-4"><a href="gis-data-download-and-preparation.html#cb14-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">keep_geo_vars =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb14-5"><a href="gis-data-download-and-preparation.html#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-6"><a href="gis-data-download-and-preparation.html#cb14-6" aria-hidden="true" tabindex="-1"></a>employment_female_filtered <span class="ot">&lt;-</span> employment_female <span class="sc">%&gt;%</span></span>
-<span id="cb14-7"><a href="gis-data-download-and-preparation.html#cb14-7" aria-hidden="true" tabindex="-1"></a>                <span class="fu">select</span>(<span class="at">FIPS =</span> GEOID, </span>
-<span id="cb14-8"><a href="gis-data-download-and-preparation.html#cb14-8" aria-hidden="true" tabindex="-1"></a>                       <span class="at">pop_employment_female =</span> estimate,</span>
-<span id="cb14-9"><a href="gis-data-download-and-preparation.html#cb14-9" aria-hidden="true" tabindex="-1"></a>                       <span class="at">moe_employment_female =</span> moe)</span>
-<span id="cb14-10"><a href="gis-data-download-and-preparation.html#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-11"><a href="gis-data-download-and-preparation.html#cb14-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-12"><a href="gis-data-download-and-preparation.html#cb14-12" aria-hidden="true" tabindex="-1"></a>countyGIS <span class="ot">&lt;-</span> countyGIS <span class="sc">%&gt;%</span></span>
-<span id="cb14-13"><a href="gis-data-download-and-preparation.html#cb14-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(employment_female_filtered, <span class="at">by =</span> <span class="st">&quot;FIPS&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb14-14"><a href="gis-data-download-and-preparation.html#cb14-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pct_employment_female =</span> <span class="dv">100</span> <span class="sc">*</span> pop_employment_female <span class="sc">/</span> pop) </span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="gis-data-download-and-preparation.html#cb10-1" aria-hidden="true" tabindex="-1"></a>employment_female <span class="ot">&lt;-</span> <span class="fu">get_acs</span>(<span class="at">geography =</span> <span class="st">&quot;county&quot;</span>,</span>
+<span id="cb10-2"><a href="gis-data-download-and-preparation.html#cb10-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">variables =</span> <span class="st">&quot;B23001_088&quot;</span>,</span>
+<span id="cb10-3"><a href="gis-data-download-and-preparation.html#cb10-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">geometry =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb10-4"><a href="gis-data-download-and-preparation.html#cb10-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">keep_geo_vars =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb10-5"><a href="gis-data-download-and-preparation.html#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="gis-data-download-and-preparation.html#cb10-6" aria-hidden="true" tabindex="-1"></a>employment_female_filtered <span class="ot">&lt;-</span> employment_female <span class="sc">%&gt;%</span></span>
+<span id="cb10-7"><a href="gis-data-download-and-preparation.html#cb10-7" aria-hidden="true" tabindex="-1"></a>                <span class="fu">select</span>(<span class="at">FIPS =</span> GEOID, </span>
+<span id="cb10-8"><a href="gis-data-download-and-preparation.html#cb10-8" aria-hidden="true" tabindex="-1"></a>                       <span class="at">pop_employment_female =</span> estimate,</span>
+<span id="cb10-9"><a href="gis-data-download-and-preparation.html#cb10-9" aria-hidden="true" tabindex="-1"></a>                       <span class="at">moe_employment_female =</span> moe)</span>
+<span id="cb10-10"><a href="gis-data-download-and-preparation.html#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-11"><a href="gis-data-download-and-preparation.html#cb10-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-12"><a href="gis-data-download-and-preparation.html#cb10-12" aria-hidden="true" tabindex="-1"></a>countyGIS <span class="ot">&lt;-</span> countyGIS <span class="sc">%&gt;%</span></span>
+<span id="cb10-13"><a href="gis-data-download-and-preparation.html#cb10-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(employment_female_filtered, <span class="at">by =</span> <span class="st">&quot;FIPS&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb10-14"><a href="gis-data-download-and-preparation.html#cb10-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pct_employment_female =</span> <span class="dv">100</span> <span class="sc">*</span> pop_employment_female <span class="sc">/</span> pop) </span></code></pre></div>
 </div>
             </section>
 
