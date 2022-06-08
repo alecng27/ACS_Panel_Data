@@ -2,12 +2,8 @@
 title: "US Presidential Election Data Visualization"
 author: Alec Nguyen^[https://alecng27.github.io/Project_Portfolio/], Bruno Sotelo, Michael Zhang
 site: bookdown::bookdown_site
-bibliography: references.bib
-biblio-style: apalike
 link-citations: yes
 ---
-
-![](map.png)
 
 # About {-}
 
@@ -21,5 +17,6 @@ The **American Community Survey (ACS)** is a demographics survey program conduct
 
 For this project, I utilized the **2019 ACS data** to explore and compare the **2020 US Presidential Election results** against the county-level demographic data.
 
+![](map.png)
 
 
